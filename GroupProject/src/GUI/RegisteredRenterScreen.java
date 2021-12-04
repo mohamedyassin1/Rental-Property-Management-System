@@ -160,31 +160,14 @@ public class RegisteredRenterScreen implements Component{
 		JButton Unsubscribe = new JButton("Unsubscribe");
 		Unsubscribe.setFont(new Font("SansSerif", Font.BOLD, 10));
 		Unsubscribe.setBackground(new Color(0, 191, 255));
-		Unsubscribe.setBounds(359, 92, 117, 21);
+		Unsubscribe.setBounds(359, 111, 117, 21);
 		frame.getContentPane().add(Unsubscribe);
 		
-		JButton notificationsButton = new JButton("Notifications");
-		notificationsButton.setFont(new Font("SansSerif", Font.BOLD, 10));
-		notificationsButton.setBackground(new Color(0, 191, 255));
-		notificationsButton.setBounds(10, 92, 115, 21);
-		frame.getContentPane().add(notificationsButton);
-		
-		JButton emailButton = new JButton("Email Landlord");
-		emailButton.setBackground(new Color(0, 191, 255));
-		emailButton.setFont(new Font("SansSerif", Font.BOLD, 10));
-		emailButton.setBounds(358, 123, 118, 21);
-		frame.getContentPane().add(emailButton);
-		emailButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Component c = new EmailSystemScreen();
-			}
-		});
-		
-		JButton returnButton = new JButton("Return To Menu");
-		returnButton.setFont(new Font("SansSerif", Font.BOLD, 10));
-		returnButton.setBackground(Color.RED);
-		returnButton.setBounds(10, 123, 115, 21);
-		frame.getContentPane().add(returnButton);
+		JButton btnViewNotifications = new JButton("Notifications");
+		btnViewNotifications.setFont(new Font("SansSerif", Font.BOLD, 10));
+		btnViewNotifications.setBackground(new Color(0, 191, 255));
+		btnViewNotifications.setBounds(10, 111, 115, 21);
+		frame.getContentPane().add(btnViewNotifications);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //when u close, makes the default close operation to exit the frame
 		frame.setLocation(dim.width/2-250, dim.height/2-250); //setting location of where the applicatio
 		frame.setSize(500,500);
