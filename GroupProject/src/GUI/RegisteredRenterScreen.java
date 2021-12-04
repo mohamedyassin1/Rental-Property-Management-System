@@ -36,8 +36,9 @@ public class RegisteredRenterScreen implements Component{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //when u close, makes the default close operation to exit the frame
 		frame.setLocation(dim.width/2-250, dim.height/2-250); //setting location of where the applicatio
 		frame.setSize(500,500);
-		
-frame.getContentPane().setLayout(null);
+		frame.getContentPane().setForeground(new Color(255, 255, 255));
+		frame.getContentPane().setBackground(new Color(255, 255, 255));
+		frame.getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 238, 466, 215);
@@ -72,6 +73,12 @@ frame.getContentPane().setLayout(null);
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
+			}
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
 			}
 		});
 		table.getColumnModel().getColumn(0).setPreferredWidth(89);
@@ -165,7 +172,5 @@ frame.getContentPane().setLayout(null);
 		frame.setLocation(dim.width/2-250, dim.height/2-250); //setting location of where the applicatio
 		frame.setSize(500,500);
 		frame.setVisible(true); //making frame actually visible
-		
-		frame.setVisible(true);
 	}
 }
