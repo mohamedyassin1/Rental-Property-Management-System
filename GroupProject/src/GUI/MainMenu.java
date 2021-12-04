@@ -111,6 +111,21 @@ public class MainMenu implements Component{
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+		JLabel lblNewLabel = new JLabel("Log in As:");
+		springLayout.putConstraint(SpringLayout.NORTH, lblNewLabel, -49, SpringLayout.NORTH, register);
+		springLayout.putConstraint(SpringLayout.WEST, lblNewLabel, 0, SpringLayout.WEST, Password);
+		springLayout.putConstraint(SpringLayout.SOUTH, lblNewLabel, -20, SpringLayout.NORTH, register);
+		springLayout.putConstraint(SpringLayout.EAST, lblNewLabel, 0, SpringLayout.EAST, Password);
+		lblNewLabel.setFont(new Font("SansSerif", Font.BOLD, 16));
+		frame.getContentPane().add(lblNewLabel);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Renter", "Landlord", "Manager"}));
+		comboBox.setFont(new Font("Serif", Font.BOLD, 12));
+		springLayout.putConstraint(SpringLayout.WEST, comboBox, 18, SpringLayout.EAST, lblNewLabel);
+		springLayout.putConstraint(SpringLayout.SOUTH, comboBox, -20, SpringLayout.NORTH, login);
+		springLayout.putConstraint(SpringLayout.EAST, comboBox, 185, SpringLayout.EAST, lblNewLabel);
+		frame.getContentPane().add(comboBox);
 		frame.getContentPane().add(GuestLogin);
 		frame.setVisible(true);
 	}
