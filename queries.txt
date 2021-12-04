@@ -1,9 +1,0 @@
-
-
-
-INSERT INTO renter(email,name,password) VALUES ("Moshipour@gmail.com","Moshirpour","123456");
-INSERT INTO landlord(email,name,password) VALUES ("Moussavi@gmail.com","Moussavi","123456");
-
-INSERT INTO property(propertyStatus,propertyType,numBedrooms,numBathrooms,furnished,quadrant,address,houseIdNum,landlord_email)
-VALUES ("ACTIVE","APARTMENT",3, 3, "YES", "SW", "123 center street", 111, "Moussavi@gmail.com");
-
