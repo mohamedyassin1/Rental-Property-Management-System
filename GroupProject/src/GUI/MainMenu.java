@@ -3,7 +3,8 @@ package GUI;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.text.AttributeSet.ColorAttribute;
-
+import controller.*;
+import model.*;
 import GUI.Component;
 
 import java.awt.event.ActionEvent;
@@ -79,6 +80,17 @@ public class MainMenu implements Component{
 		register.setFont(new Font("SansSerif", Font.BOLD, 14));
 		register.setBounds(31, 402, 138, 32);
 		frame.getContentPane().add(register);
+		register.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String nameInput = name.getText();
+				String passwordInput = String.valueOf(password.getPassword());
+				String emailInput = email.getText();
+				String selectedType = String.valueOf(loginChooser.getSelectedItem());
+				AuthenticateController authenticate = new AuthenticateController(nameInput, emailInput, passwordInput, selectedType);
+				authenticate.register();
+				JOptionPane.showMessageDialog(frame, "you have successfully registered");
+			}
+		});
 		
 		JButton login = new JButton("Login");
 		login.setFont(new Font("SansSerif", Font.BOLD, 14));
@@ -107,5 +119,5 @@ public class MainMenu implements Component{
 				}
 			});
 			frame.setVisible(true);
-	}
+		}
 }
