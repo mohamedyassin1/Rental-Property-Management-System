@@ -1,8 +1,8 @@
 package model;
 
 public class Renter extends User{
-    public Renter(String email, String pass,String name){
-        super(email, pass, name);
+    public Renter(String email, String name,String password){
+        super(email, name, password);
     }
     public Renter(){
         super(); //unregistered
