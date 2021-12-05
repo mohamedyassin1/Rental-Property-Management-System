@@ -24,7 +24,6 @@ public class EmailSystemScreen implements Component{
 		emailFrame = new JFrame();
 		emailFrame.getContentPane().setBackground(new Color(255, 255, 255));
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();//This gets your screensize
-		emailFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //when u close, makes the default close operation to exit the frame
 		emailFrame.setLocation(dim.width/2-250, dim.height/2-250); //setting location of where the applicatio
 		emailFrame.setSize(500,300);
 		emailFrame.getContentPane().setForeground(new Color(255, 255, 255));
@@ -76,10 +75,11 @@ public class EmailSystemScreen implements Component{
 		emailFrame.getContentPane().add(TitlePanel);
 		TitlePanel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Email a Landlord For More Information\r\n");
-		lblNewLabel.setFont(new Font("SansSerif", Font.BOLD, 18));
-		lblNewLabel.setBounds(54, 0, 355, 22);
-		TitlePanel.add(lblNewLabel);
+		JLabel title = new JLabel("Email a Landlord For More Information\r\n");
+		title.setFont(new Font("SansSerif", Font.BOLD, 18));
+		title.setForeground(new Color(255,255,255));
+		title.setBounds(54, 0, 355, 22);
+		TitlePanel.add(title);
 		
 		emailFrame.setVisible(true);
 		
