@@ -66,11 +66,14 @@ public class LandlordScreen implements Component{
 		RegisterFormButton.setBackground(new Color(0, 191, 255));
 		RegisterFormButton.setFont(new Font("SansSerif", Font.BOLD, 12));
 		RegisterFormButton.setBounds(249, 111, 179, 22);
+		RegisterFormButton.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(RegisterFormButton);
 		
 		JButton payFees = new JButton("Pay Fee");
 		payFees.setBackground(new Color(0, 191, 255));
 		payFees.setBounds(54, 202, 104, 34);
+		payFees.setForeground(new Color(255, 255, 255));
+		payFees.setFont(new Font("SansSerif", Font.BOLD, 16));
 		frame.getContentPane().add(payFees);
 		
 		JComboBox stateOfListing = new JComboBox();
@@ -84,6 +87,7 @@ public class LandlordScreen implements Component{
 		updateState.setBackground(new Color(0, 191, 255));
 		updateState.setFont(new Font("SansSerif", Font.BOLD, 12));
 		updateState.setBounds(254, 232, 147, 21);
+		updateState.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(updateState);
 		
 		JButton LogoutButton = new JButton("Logout");

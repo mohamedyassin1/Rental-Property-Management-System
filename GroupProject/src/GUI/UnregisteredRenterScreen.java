@@ -155,12 +155,14 @@ public class UnregisteredRenterScreen implements Component{
 		Search.setBackground(new Color(0, 191, 255));
 		Search.setFont(new Font("SansSerif", Font.BOLD, 18));
 		Search.setBounds(135, 92, 198, 52);
+		Search.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(Search);
 		
 		JButton Unsubscribe = new JButton("Unsubscribe");
 		Unsubscribe.setFont(new Font("SansSerif", Font.BOLD, 10));
 		Unsubscribe.setBackground(new Color(0, 191, 255));
 		Unsubscribe.setBounds(359, 92, 117, 21);
+		Unsubscribe.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(Unsubscribe);
 		
 		
@@ -168,6 +170,7 @@ public class UnregisteredRenterScreen implements Component{
 		emailButton.setBackground(new Color(0, 191, 255));
 		emailButton.setFont(new Font("SansSerif", Font.BOLD, 10));
 		emailButton.setBounds(358, 123, 118, 21);
+		emailButton.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(emailButton);
 		emailButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -179,6 +182,7 @@ public class UnregisteredRenterScreen implements Component{
 		returnButton.setFont(new Font("SansSerif", Font.BOLD, 10));
 		returnButton.setBackground(new Color(0, 191, 255));
 		returnButton.setBounds(10, 123, 115, 21);
+		returnButton.setForeground(new Color(255, 255, 255));
 		returnButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Component c = new MainMenu();

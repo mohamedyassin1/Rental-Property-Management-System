@@ -155,24 +155,28 @@ public class RegisteredRenterScreen implements Component{
 		Search.setBackground(new Color(0, 191, 255));
 		Search.setFont(new Font("SansSerif", Font.BOLD, 18));
 		Search.setBounds(135, 92, 198, 52);
+		Search.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(Search);
 		
 		JButton Unsubscribe = new JButton("Unsubscribe");
 		Unsubscribe.setFont(new Font("SansSerif", Font.BOLD, 10));
 		Unsubscribe.setBackground(new Color(0, 191, 255));
 		Unsubscribe.setBounds(359, 92, 117, 21);
+		Unsubscribe.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(Unsubscribe);
 		
-		JButton btnViewNotifications = new JButton("Notifications");
-		btnViewNotifications.setFont(new Font("SansSerif", Font.BOLD, 10));
-		btnViewNotifications.setBackground(new Color(0, 191, 255));
-		btnViewNotifications.setBounds(10, 92, 115, 21);
-		frame.getContentPane().add(btnViewNotifications);
+		JButton viewNotifications = new JButton("Notifications");
+		viewNotifications.setFont(new Font("SansSerif", Font.BOLD, 10));
+		viewNotifications.setBackground(new Color(0, 191, 255));
+		viewNotifications.setBounds(10, 92, 115, 21);
+		viewNotifications.setForeground(new Color(255, 255, 255));
+		frame.getContentPane().add(viewNotifications);
 		
 		JButton emailButton = new JButton("Email Landlord");
 		emailButton.setBackground(new Color(0, 191, 255));
 		emailButton.setFont(new Font("SansSerif", Font.BOLD, 10));
 		emailButton.setBounds(358, 123, 118, 21);
+		emailButton.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(emailButton);
 		emailButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
