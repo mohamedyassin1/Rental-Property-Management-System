@@ -17,7 +17,8 @@ public class Renter extends User{
     public void SearchProperties(){
         //get All Properties in DB
     }
+    /*
     public void SearchPropertiesByCriteria(PropertyType type, int numBedrooms, int numBathrooms, boolean furnished, CityQuadrant quadrant){
         //get all properties that match the criteria
-    }
+    }*/
 }

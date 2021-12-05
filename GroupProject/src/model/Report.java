@@ -30,7 +30,7 @@ public class Report {
             output.write("Houses Rented:\n\n");
             for(int i=0;i<(int)housesRented.size();i++){
                 //loop through each property that is rented in DB
-                output.write(housesRented.get(i).getId()+"   "+housesRented.get(i).getType()+"   "+housesRented.get(i).getAddress()+"   "+housesRented.get(i).getOwner().name);
+                //output.write(housesRented.get(i).getId()+"   "+housesRented.get(i).getType()+"   "+housesRented.get(i).getAddress()+"   "+housesRented.get(i).getOwner().name);
                 output.write("\n");
             }
             output.close();

@@ -15,6 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import controller.PropertyPostingController;
+
 public class RegisterPropertyScreen implements Component{
 	public RegisterPropertyScreen() {
 		draw();
@@ -75,12 +77,12 @@ public class RegisterPropertyScreen implements Component{
 		question3.setBounds(23, 210, 240, 26);
 		frame.getContentPane().add(question3);
 		
-		JComboBox answer2_1 = new JComboBox();
-		answer2_1.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8"}));
-		answer2_1.setForeground(new Color(255, 255, 255));
-		answer2_1.setBackground(new Color(0, 191, 255));
-		answer2_1.setBounds(23, 246, 154, 21);
-		frame.getContentPane().add(answer2_1);
+		JComboBox answer3 = new JComboBox();
+		answer3.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8"}));
+		answer3.setForeground(new Color(255, 255, 255));
+		answer3.setBackground(new Color(0, 191, 255));
+		answer3.setBounds(23, 246, 154, 21);
+		frame.getContentPane().add(answer3);
 		
 		JLabel question4 = new JLabel("Is it furnished?");
 		question4.setFont(new Font("SansSerif", Font.BOLD, 12));
@@ -99,12 +101,12 @@ public class RegisterPropertyScreen implements Component{
 		question5.setBounds(23, 359, 240, 26);
 		frame.getContentPane().add(question5);
 		
-		JComboBox answer2_1_1 = new JComboBox();
-		answer2_1_1.setForeground(new Color(255, 255, 255));
-		answer2_1_1.setModel(new DefaultComboBoxModel(new String[] {"NW", "NE", "SW", "SE"}));
-		answer2_1_1.setBackground(new Color(0, 191, 255));
-		answer2_1_1.setBounds(23, 401, 154, 21);
-		frame.getContentPane().add(answer2_1_1);
+		JComboBox answer5 = new JComboBox();
+		answer5.setForeground(new Color(255, 255, 255));
+		answer5.setModel(new DefaultComboBoxModel(new String[] {"NW", "NE", "SW", "SE"}));
+		answer5.setBackground(new Color(0, 191, 255));
+		answer5.setBounds(23, 401, 154, 21);
+		frame.getContentPane().add(answer5);
 		
 		JButton finishRegistration = new JButton("Register");
 		finishRegistration.setBackground(new Color(0, 191, 255));
@@ -113,7 +115,14 @@ public class RegisterPropertyScreen implements Component{
 		finishRegistration.setBounds(286, 401, 161, 21);
 		finishRegistration.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Component c = new LandlordScreen();
+				String propertyTypeInput = String.valueOf(answer1.getSelectedItem());
+				int numBedroomsInput = Integer.valueOf(String.valueOf(answer2.getSelectedItem()));
+				int numBathroomsInput = Integer.valueOf(String.valueOf(answer3.getSelectedItem()));
+				boolean furnished = false;
+				if (answer4.isSelected()){ furnished = true;}
+				String quandrantInput = String.valueOf(answer5.getSelectedItem());
+				PropertyPostingController posting = new PropertyPostingController("SUSPENDED", propertyTypeInput, numBedroomsInput, numBathroomsInput, furnished, quandrantInput,
+				"123Street", 11, "Moussavi@gmail.com");
 			}
 		});
 		frame.getContentPane().add(finishRegistration);
