@@ -109,6 +109,17 @@ public class LandlordScreen implements Component{
 				Component c = new MainMenu();
 			}
 		});
+		
+		JButton emails = new JButton("Emails");
+		emails.setBackground(new Color(0, 191, 255));
+		emails.setFont(new Font("SansSerif", Font.BOLD, 12));
+		emails.setBounds(54, 51, 91, 22);
+		frame.getContentPane().add(emails);
+		emails.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		
 		frame.setVisible(true); //making frame actually visible		
 	}
 }
