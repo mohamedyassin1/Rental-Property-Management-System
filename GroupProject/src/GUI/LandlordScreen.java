@@ -41,15 +41,17 @@ public class LandlordScreen implements Component{
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Logged in as Landlord");
-		lblNewLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
-		lblNewLabel.setBounds(134, 0, 226, 41);
-		panel.add(lblNewLabel);
+		JLabel landlordTitle = new JLabel("Logged in as Landlord");
+		landlordTitle.setFont(new Font("SansSerif", Font.BOLD, 20));
+		landlordTitle.setBounds(134, 0, 226, 41);
+		landlordTitle.setForeground(new Color(255, 255, 255));
+		panel.add(landlordTitle);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBackground(new Color(0, 191, 255));
 		comboBox.setMaximumRowCount(50);
 		comboBox.setBounds(37, 112, 168, 21);
+		comboBox.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(comboBox);
 		
 		JLabel PropertySelector = new JLabel("My Properties");
@@ -86,6 +88,7 @@ public class LandlordScreen implements Component{
 		stateOfListing.setFont(new Font("SansSerif", Font.BOLD, 12));
 		stateOfListing.setModel(new DefaultComboBoxModel(new String[] {"Active", "Rented", "Cancelled", "Suspended"}));
 		stateOfListing.setBounds(249, 195, 152, 27);
+		stateOfListing.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(stateOfListing);
 		
 		JButton updateState = new JButton("Update State");
@@ -99,6 +102,7 @@ public class LandlordScreen implements Component{
 		LogoutButton.setFont(new Font("SansSerif", Font.BOLD, 12));
 		LogoutButton.setBackground(new Color(255, 0, 0));
 		LogoutButton.setBounds(343, 51, 103, 21);
+		LogoutButton.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(LogoutButton);
 		LogoutButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

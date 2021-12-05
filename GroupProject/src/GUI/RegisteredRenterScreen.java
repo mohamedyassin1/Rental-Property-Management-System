@@ -92,6 +92,7 @@ public class RegisteredRenterScreen implements Component{
 		
 		JLabel Title = new JLabel("Browse Properties");
 		Title.setBounds(135, 20, 220, 32);
+		Title.setForeground(new Color(255, 255, 255));
 		titlePanel.add(Title);
 		Title.setFont(new Font("SansSerif", Font.BOLD, 24));
 		
@@ -100,6 +101,7 @@ public class RegisteredRenterScreen implements Component{
 		PropertyType.setBackground(new Color(0, 191, 255));
 		PropertyType.setFont(new Font("SansSerif", Font.PLAIN, 12));
 		PropertyType.setBounds(10, 192, 73, 21);
+		PropertyType.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(PropertyType);
 		
 		JComboBox NumBedrooms = new JComboBox();
@@ -107,6 +109,7 @@ public class RegisteredRenterScreen implements Component{
 		NumBedrooms.setFont(new Font("SansSerif", Font.PLAIN, 12));
 		NumBedrooms.setBackground(new Color(0, 191, 255));
 		NumBedrooms.setBounds(108, 192, 67, 21);
+		NumBedrooms.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(NumBedrooms);
 		
 		JComboBox NumBathrooms = new JComboBox();
@@ -114,6 +117,7 @@ public class RegisteredRenterScreen implements Component{
 		NumBathrooms.setFont(new Font("SansSerif", Font.PLAIN, 12));
 		NumBathrooms.setBackground(new Color(0, 191, 255));
 		NumBathrooms.setBounds(196, 192, 60, 21);
+		NumBathrooms.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(NumBathrooms);
 		
 		JComboBox Quadrant = new JComboBox();
@@ -121,10 +125,13 @@ public class RegisteredRenterScreen implements Component{
 		Quadrant.setFont(new Font("SansSerif", Font.PLAIN, 12));
 		Quadrant.setBackground(new Color(0, 191, 255));
 		Quadrant.setBounds(374, 193, 88, 21);
+		Quadrant.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(Quadrant);
 		
 		JRadioButton Furnished = new JRadioButton("Furnished");
 		Furnished.setBounds(280, 193, 88, 21);
+		Furnished.setBackground(new Color(0, 191, 255));
+		Furnished.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(Furnished);
 		
 		JLabel label1 = new JLabel("PropertyType");
@@ -188,6 +195,7 @@ public class RegisteredRenterScreen implements Component{
 		JButton returnButton = new JButton("Logout");
 		returnButton.setFont(new Font("SansSerif", Font.BOLD, 10));
 		returnButton.setBackground(Color.RED);
+		returnButton.setForeground(new Color(255, 255, 255));
 		returnButton.setBounds(10, 123, 115, 21);
 		returnButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
