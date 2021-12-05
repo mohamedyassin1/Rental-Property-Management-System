@@ -49,7 +49,6 @@ public class DBMS {
     }
     public void registerRenter(String name, String email, String password){
         try {
-                
             String query = "INSERT INTO renter (email, name, password) VALUES (?,?,?)";
             PreparedStatement myStmt = dbConnect.prepareStatement(query);
             
