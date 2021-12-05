@@ -2,10 +2,10 @@ package model;
 
 public class RegisteredRenter extends Renter{
     
-    RegisteredRenter(String name, String email, String pass){
+    public RegisteredRenter(String name, String email, String pass){
         super(name, email, pass);
     }
-    RegisteredRenter(Renter r){
+    public RegisteredRenter(Renter r){
         super(r.name, r.email, r.password);
     }
     public void saveSearchCriteria(PropertyType type, int numBedrooms, int numBathrooms, boolean furnished, CityQuadrant quadrant){

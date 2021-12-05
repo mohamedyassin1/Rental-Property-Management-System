@@ -65,24 +65,24 @@ public class RegisteredRenterScreen implements Component{
 				{null, null, null, null, null, null},
 			},
 			new String[] {
-				"LandlordEmail", "Property Type", "#Bedrooms", "#Bathrooms", "Furnished", "Quadrant"
+				"PropertyID", "Property Type", "#Bedrooms", "#Bathrooms", "Furnished", "Quadrant"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				String.class, String.class, Integer.class, Integer.class, Boolean.class, String.class
+				Integer.class, String.class, Integer.class, Integer.class, Boolean.class, String.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
-			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
 		});
-		table.getColumnModel().getColumn(0).setPreferredWidth(89);
+		table.getColumnModel().getColumn(0).setPreferredWidth(65);
+		table.getColumnModel().getColumn(1).setPreferredWidth(90);
+		table.getColumnModel().getColumn(2).setPreferredWidth(63);
+		table.getColumnModel().getColumn(3).setPreferredWidth(66);
+		table.getColumnModel().getColumn(4).setPreferredWidth(55);
+		table.getColumnModel().getColumn(5).setPreferredWidth(52);
 		scrollPane.setViewportView(table);
+		
 		
 		JPanel titlePanel = new JPanel();
 		titlePanel.setBackground(new Color(0, 191, 255));
@@ -92,6 +92,7 @@ public class RegisteredRenterScreen implements Component{
 		
 		JLabel Title = new JLabel("Browse Properties");
 		Title.setBounds(135, 20, 220, 32);
+		Title.setForeground(new Color(255, 255, 255));
 		titlePanel.add(Title);
 		Title.setFont(new Font("SansSerif", Font.BOLD, 24));
 		
@@ -100,6 +101,7 @@ public class RegisteredRenterScreen implements Component{
 		PropertyType.setBackground(new Color(0, 191, 255));
 		PropertyType.setFont(new Font("SansSerif", Font.PLAIN, 12));
 		PropertyType.setBounds(10, 192, 73, 21);
+		PropertyType.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(PropertyType);
 		
 		JComboBox NumBedrooms = new JComboBox();
@@ -107,6 +109,7 @@ public class RegisteredRenterScreen implements Component{
 		NumBedrooms.setFont(new Font("SansSerif", Font.PLAIN, 12));
 		NumBedrooms.setBackground(new Color(0, 191, 255));
 		NumBedrooms.setBounds(108, 192, 67, 21);
+		NumBedrooms.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(NumBedrooms);
 		
 		JComboBox NumBathrooms = new JComboBox();
@@ -114,6 +117,7 @@ public class RegisteredRenterScreen implements Component{
 		NumBathrooms.setFont(new Font("SansSerif", Font.PLAIN, 12));
 		NumBathrooms.setBackground(new Color(0, 191, 255));
 		NumBathrooms.setBounds(196, 192, 60, 21);
+		NumBathrooms.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(NumBathrooms);
 		
 		JComboBox Quadrant = new JComboBox();
@@ -121,10 +125,13 @@ public class RegisteredRenterScreen implements Component{
 		Quadrant.setFont(new Font("SansSerif", Font.PLAIN, 12));
 		Quadrant.setBackground(new Color(0, 191, 255));
 		Quadrant.setBounds(374, 193, 88, 21);
+		Quadrant.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(Quadrant);
 		
 		JRadioButton Furnished = new JRadioButton("Furnished");
 		Furnished.setBounds(280, 193, 88, 21);
+		Furnished.setBackground(new Color(0, 191, 255));
+		Furnished.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(Furnished);
 		
 		JLabel label1 = new JLabel("PropertyType");
@@ -155,19 +162,47 @@ public class RegisteredRenterScreen implements Component{
 		Search.setBackground(new Color(0, 191, 255));
 		Search.setFont(new Font("SansSerif", Font.BOLD, 18));
 		Search.setBounds(135, 92, 198, 52);
+		Search.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(Search);
 		
 		JButton Unsubscribe = new JButton("Unsubscribe");
 		Unsubscribe.setFont(new Font("SansSerif", Font.BOLD, 10));
 		Unsubscribe.setBackground(new Color(0, 191, 255));
-		Unsubscribe.setBounds(359, 111, 117, 21);
+		Unsubscribe.setBounds(359, 92, 117, 21);
+		Unsubscribe.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(Unsubscribe);
 		
-		JButton btnViewNotifications = new JButton("Notifications");
-		btnViewNotifications.setFont(new Font("SansSerif", Font.BOLD, 10));
-		btnViewNotifications.setBackground(new Color(0, 191, 255));
-		btnViewNotifications.setBounds(10, 111, 115, 21);
-		frame.getContentPane().add(btnViewNotifications);
+		JButton viewNotifications = new JButton("Notifications");
+		viewNotifications.setFont(new Font("SansSerif", Font.BOLD, 10));
+		viewNotifications.setBackground(new Color(0, 191, 255));
+		viewNotifications.setBounds(10, 92, 115, 21);
+		viewNotifications.setForeground(new Color(255, 255, 255));
+		frame.getContentPane().add(viewNotifications);
+		
+		JButton emailButton = new JButton("Email Landlord");
+		emailButton.setBackground(new Color(0, 191, 255));
+		emailButton.setFont(new Font("SansSerif", Font.BOLD, 10));
+		emailButton.setBounds(358, 123, 118, 21);
+		emailButton.setForeground(new Color(255, 255, 255));
+		frame.getContentPane().add(emailButton);
+		emailButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Component c = new EmailSystemScreen();
+			}
+		});
+		
+		
+		JButton returnButton = new JButton("Logout");
+		returnButton.setFont(new Font("SansSerif", Font.BOLD, 10));
+		returnButton.setBackground(Color.RED);
+		returnButton.setForeground(new Color(255, 255, 255));
+		returnButton.setBounds(10, 123, 115, 21);
+		returnButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Component c = new MainMenu();
+			}
+		});
+		frame.getContentPane().add(returnButton);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //when u close, makes the default close operation to exit the frame
 		frame.setLocation(dim.width/2-250, dim.height/2-250); //setting location of where the applicatio
 		frame.setSize(500,500);
