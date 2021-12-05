@@ -67,6 +67,11 @@ public class LandlordScreen implements Component{
 		RegisterFormButton.setFont(new Font("SansSerif", Font.BOLD, 12));
 		RegisterFormButton.setBounds(249, 111, 179, 22);
 		RegisterFormButton.setForeground(new Color(255, 255, 255));
+		RegisterFormButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Component c = new RegisterPropertyScreen();
+			}
+		});
 		frame.getContentPane().add(RegisterFormButton);
 		
 		JButton payFees = new JButton("Pay Fee");
