@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -74,6 +76,7 @@ public class EmailSystemScreen implements Component{
 		TitlePanel.setBounds(0, 0, 486, 22);
 		emailFrame.getContentPane().add(TitlePanel);
 		TitlePanel.setLayout(null);
+		
 		
 		JLabel title = new JLabel("Email a Landlord For More Information\r\n");
 		title.setFont(new Font("SansSerif", Font.BOLD, 18));
