@@ -1,4 +1,5 @@
 package model;
+/*
 enum PropertyType {
     ATTACHEDHOUSE,
     DETACHEDHOUSE,
@@ -6,48 +7,50 @@ enum PropertyType {
     TOWNHOUSE,
     CONDO
 }
-enum PropertyStatus {
+public enum PropertyStatus {
     ACTIVE,
     RENTED,
     CANCELLED,
     SUSPENDED
 }
-enum CityQuadrant {
+public enum CityQuadrant {
     NW,
     NE,
     SW,
     SE
-}
+}*/
+
 public class Property {
-    private PropertyStatus status;
-    private PropertyType type;
+    
+    private String propertyStatus;
+    private String propertyType;
     private int numBedrooms;
     private int numBathrooms;
     private boolean furnished;
-    private CityQuadrant quadrant;
+    private String quadrant;
     private String address;
     private int id;
-    private Landlord owner;
-    public Property(PropertyStatus status, PropertyType type, int numBedrooms, int numBathrooms, boolean furnished,
-            CityQuadrant quadrant, String address, int id, Landlord owner) {
-        this.status = status;
-        this.type = type;
+    private String email;
+    public Property(String propertyStatus, String propertyType, int numBedrooms, int numBathrooms, boolean furnished,
+            String quadrant, String address, int id, String loggedinEmail) {
+        this.propertyStatus = propertyStatus;
+        this.propertyType = propertyType;
         this.numBedrooms = numBedrooms;
         this.numBathrooms = numBathrooms;
         this.furnished = furnished;
         this.quadrant = quadrant;
         this.address = address;
         this.id = id;
-        this.owner = owner;
+        this.email = loggedinEmail;
     }
-    public PropertyStatus getStatus() {
-        return status;
+    public String getStatus() {
+        return propertyStatus;
     }
-    public void setStatus(PropertyStatus status) {
-        this.status = status;
+    public void setStatus(String propertyStatus) {
+        this.propertyStatus = propertyStatus;
     }
-    public PropertyType getType() {
-        return type;
+    public String getType() {
+        return propertyType;
     }
     
     public int getNumBedrooms() {
@@ -64,7 +67,7 @@ public class Property {
     public void setFurnished(boolean furnished) {
         this.furnished = furnished;
     }
-    public CityQuadrant getQuadrant() {
+    public String getQuadrant() {
         return quadrant;
     }
     
@@ -76,8 +79,8 @@ public class Property {
         return id;
     }
     
-    public Landlord getOwner() {
-        return owner;
+    public String getEmail() {
+        return email;
     }
     
     

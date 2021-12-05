@@ -111,10 +111,30 @@ public class MainMenu implements Component{
 					String selectedLogin = String.valueOf(loginChooser.getSelectedItem());
 					if (selectedLogin == "Landlord")
 					{
-						Component c = new LandlordScreen();
+						String nameInput = name.getText();
+						String passwordInput = String.valueOf(password.getPassword());
+						String emailInput = email.getText();
+						String selectedType = String.valueOf(loginChooser.getSelectedItem());
+						AuthenticateController authenticate = new AuthenticateController(nameInput, emailInput, passwordInput, selectedType);
+						if(authenticate.login()){
+							Component c = new LandlordScreen();
+						}
+						else{
+							JOptionPane.showMessageDialog(frame, "Login failed, check inputs");
+						}	
 					}
 					if (selectedLogin == "Renter") {
-						Component c = new RegisteredRenterScreen();
+						String nameInput = name.getText();
+						String passwordInput = String.valueOf(password.getPassword());
+						String emailInput = email.getText();
+						String selectedType = String.valueOf(loginChooser.getSelectedItem());
+						AuthenticateController authenticate = new AuthenticateController(nameInput, emailInput, passwordInput, selectedType);
+						if(authenticate.login()){
+							Component c = new RegisteredRenterScreen();
+						}
+						else{
+							JOptionPane.showMessageDialog(frame, "Login failed, check inputs");
+						}	
 					}
 				}
 			});
