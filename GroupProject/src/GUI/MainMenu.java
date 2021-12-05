@@ -32,21 +32,8 @@ public class MainMenu implements Component{
 		register.setFont(new Font("SansSerif", Font.BOLD, 16));
 		frame.getContentPane().add(register);
 		
-		JButton login = new JButton("Login");
-		springLayout.putConstraint(SpringLayout.WEST, login, 165, SpringLayout.WEST, frame.getContentPane());
-		springLayout.putConstraint(SpringLayout.EAST, register, -6, SpringLayout.WEST, login);
-		springLayout.putConstraint(SpringLayout.NORTH, login, 0, SpringLayout.NORTH, register);
-		springLayout.putConstraint(SpringLayout.SOUTH, login, 0, SpringLayout.SOUTH, register);
-		springLayout.putConstraint(SpringLayout.EAST, login, -189, SpringLayout.EAST, frame.getContentPane());
-		login.setBackground(new Color(0, 191, 255));
-		login.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Component c = new RegisteredRenterScreen();
-			}
-		});
-		login.setForeground(new Color(255, 255, 255));
-		login.setFont(new Font("SansSerif", Font.BOLD, 16));
-		frame.getContentPane().add(login);
+		
+		
 		
 		JTextField email = new JTextField();
 		email.setFont(new Font("SansSerif", Font.BOLD, 12));
@@ -98,6 +85,17 @@ public class MainMenu implements Component{
 		Title.setFont(new Font("SansSerif", Font.BOLD, 28));
 		titlePanel.add(Title);
 		
+		JButton login = new JButton("Login");
+		springLayout.putConstraint(SpringLayout.WEST, login, 165, SpringLayout.WEST, frame.getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, register, -6, SpringLayout.WEST, login);
+		springLayout.putConstraint(SpringLayout.NORTH, login, 0, SpringLayout.NORTH, register);
+		springLayout.putConstraint(SpringLayout.SOUTH, login, 0, SpringLayout.SOUTH, register);
+		springLayout.putConstraint(SpringLayout.EAST, login, -189, SpringLayout.EAST, frame.getContentPane());
+		login.setBackground(new Color(0, 191, 255));
+		login.setForeground(new Color(255, 255, 255));
+		login.setFont(new Font("SansSerif", Font.BOLD, 16));
+		frame.getContentPane().add(login);
+		
 		JButton GuestLogin = new JButton("Login as Guest");
 		springLayout.putConstraint(SpringLayout.NORTH, GuestLogin, 0, SpringLayout.NORTH, register);
 		springLayout.putConstraint(SpringLayout.WEST, GuestLogin, 6, SpringLayout.EAST, login);
@@ -108,6 +106,7 @@ public class MainMenu implements Component{
 		GuestLogin.setFont(new Font("SansSerif", Font.BOLD, 16));
 		GuestLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Component c = new UnregisteredRenterScreen();
 			}
 		});
 		frame.getContentPane().add(GuestLogin);
@@ -119,6 +118,8 @@ public class MainMenu implements Component{
 		springLayout.putConstraint(SpringLayout.EAST, lblNewLabel, 0, SpringLayout.EAST, Password);
 		lblNewLabel.setFont(new Font("SansSerif", Font.BOLD, 16));
 		frame.getContentPane().add(lblNewLabel);
+		
+
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Renter", "Landlord", "Manager"}));
@@ -147,6 +148,20 @@ public class MainMenu implements Component{
 		springLayout.putConstraint(SpringLayout.NORTH, password, 6, SpringLayout.SOUTH, username);
 		username.setColumns(10);
 		frame.getContentPane().add(username);
+		
+
+		login.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String selectedLogin = String.valueOf(comboBox.getSelectedItem());
+				if (selectedLogin == "Landlord")
+				{
+					Component c = new LandlordScreen();
+				}
+				if (selectedLogin == "Renter") {
+					Component c = new RegisteredRenterScreen();
+				}
+			}
+		});
 		frame.setVisible(true);
 	}
 }

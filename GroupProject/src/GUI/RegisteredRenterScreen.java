@@ -65,24 +65,24 @@ public class RegisteredRenterScreen implements Component{
 				{null, null, null, null, null, null},
 			},
 			new String[] {
-				"LandlordEmail", "Property Type", "#Bedrooms", "#Bathrooms", "Furnished", "Quadrant"
+				"PropertyID", "Property Type", "#Bedrooms", "#Bathrooms", "Furnished", "Quadrant"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				String.class, String.class, Integer.class, Integer.class, Boolean.class, String.class
+				Integer.class, String.class, Integer.class, Integer.class, Boolean.class, String.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
-			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
 		});
-		table.getColumnModel().getColumn(0).setPreferredWidth(89);
+		table.getColumnModel().getColumn(0).setPreferredWidth(65);
+		table.getColumnModel().getColumn(1).setPreferredWidth(90);
+		table.getColumnModel().getColumn(2).setPreferredWidth(63);
+		table.getColumnModel().getColumn(3).setPreferredWidth(66);
+		table.getColumnModel().getColumn(4).setPreferredWidth(55);
+		table.getColumnModel().getColumn(5).setPreferredWidth(52);
 		scrollPane.setViewportView(table);
+		
 		
 		JPanel titlePanel = new JPanel();
 		titlePanel.setBackground(new Color(0, 191, 255));
@@ -181,10 +181,15 @@ public class RegisteredRenterScreen implements Component{
 		});
 		
 		
-		JButton returnButton = new JButton("Return To Menu");
+		JButton returnButton = new JButton("Logout");
 		returnButton.setFont(new Font("SansSerif", Font.BOLD, 10));
 		returnButton.setBackground(Color.RED);
 		returnButton.setBounds(10, 123, 115, 21);
+		returnButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Component c = new MainMenu();
+			}
+		});
 		frame.getContentPane().add(returnButton);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //when u close, makes the default close operation to exit the frame
 		frame.setLocation(dim.width/2-250, dim.height/2-250); //setting location of where the applicatio
