@@ -55,7 +55,7 @@ public class RegisterPropertyScreen implements Component{
 		JLabel title = new JLabel("Register Your Property");
 		title.setForeground(new Color(255, 255, 255));
 		title.setFont(new Font("SansSerif", Font.BOLD, 20));
-		title.setBounds(129, 10, 218, 27);
+		title.setBounds(129, 10, 240, 27);
 		titlePanel.add(title);
 		
 		JLabel question2 = new JLabel("How many bedrooms does it have?");
