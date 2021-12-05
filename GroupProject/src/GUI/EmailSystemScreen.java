@@ -24,14 +24,12 @@ public class EmailSystemScreen implements Component{
 	@Override
 	public void draw() {
 		emailFrame = new JFrame();
-		emailFrame.getContentPane().setBackground(new Color(255, 255, 255));
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();//This gets your screensize
-		emailFrame.setLocation(dim.width/2-250, dim.height/2-250); //setting location of where the applicatio
-		emailFrame.setSize(500,300);
-		emailFrame.getContentPane().setForeground(new Color(255, 255, 255));
-		emailFrame.getContentPane().setBackground(new Color(255, 255, 255));
+		emailFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //when u close, makes the default close operation to exit the emailFrame
+		emailFrame.setLocation(dim.width/2-250, dim.height/2-250); 
+		emailFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		emailFrame.getContentPane().setLayout(null);
-		
+		emailFrame.setSize(767,305);
 		
 		JTextArea Message = new JTextArea();
 		Message.setForeground(new Color(255, 255, 255));
@@ -73,16 +71,25 @@ public class EmailSystemScreen implements Component{
 		
 		JPanel TitlePanel = new JPanel();
 		TitlePanel.setBackground(new Color(0, 191, 255));
-		TitlePanel.setBounds(0, 0, 486, 22);
+		TitlePanel.setBounds(0, 0, 753, 22);
 		emailFrame.getContentPane().add(TitlePanel);
 		TitlePanel.setLayout(null);
 		
+		JLabel titleLabel = new JLabel("Email a Landlord For More Information\r\n");
+		titleLabel.setFont(new Font("SansSerif", Font.BOLD, 18));
+		titleLabel.setBounds(54, 0, 355, 22);
+		TitlePanel.add(titleLabel);
 		
-		JLabel title = new JLabel("Email a Landlord For More Information\r\n");
-		title.setFont(new Font("SansSerif", Font.BOLD, 18));
-		title.setForeground(new Color(255,255,255));
-		title.setBounds(54, 0, 355, 22);
-		TitlePanel.add(title);
+		JLabel inboxLabel = new JLabel("Inbox");
+		inboxLabel.setFont(new Font("SansSerif", Font.BOLD, 18));
+		inboxLabel.setBounds(548, 0, 69, 22);
+		TitlePanel.add(inboxLabel);
+		
+		JTextArea inbox = new JTextArea();
+		inbox.setBackground(new Color(192, 192, 192));
+		inbox.setEditable(false);
+		inbox.setBounds(422, 37, 295, 200);
+		emailFrame.getContentPane().add(inbox);
 		
 		emailFrame.setVisible(true);
 		
