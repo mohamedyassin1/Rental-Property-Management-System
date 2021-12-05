@@ -99,11 +99,10 @@ CREATE TABLE IF NOT EXISTS `mydb`.`fees` (
 ENGINE = InnoDB;
 
 
-<<<<<<< HEAD
 -- -----------------------------------------------------
--- Table `mydb`.`landlord_has_renter`
+-- Table `mydb`.`emails`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`landlord_has_renter` (
+CREATE TABLE IF NOT EXISTS `mydb`.`emails` (
   `landlord_email` VARCHAR(45) NOT NULL,
   `renter_email` VARCHAR(45) NOT NULL,
   `message` VARCHAR(120) NOT NULL,
@@ -123,8 +122,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`landlord_has_renter` (
 ENGINE = InnoDB;
 
 
-=======
->>>>>>> main
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
