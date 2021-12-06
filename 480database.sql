@@ -58,9 +58,9 @@ CREATE TABLE IF NOT EXISTS `mydb`.`property` (
   `furnished` VARCHAR(4) NOT NULL,
   `quadrant` VARCHAR(4) NOT NULL,
   `address` VARCHAR(45) NOT NULL,
-  `houseIdNum` INT NOT NULL,
+  `houseIdNum` INT NULL AUTO_INCREMENT,
   `landlord_email` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`houseIdNum`),
+  PRIMARY KEY (`landlord_email`),
   INDEX `fk_property_landlord1_idx` (`landlord_email` ASC) VISIBLE,
   CONSTRAINT `fk_property_landlord1`
     FOREIGN KEY (`landlord_email`)
@@ -96,29 +96,6 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `mydb`.`fees` (
   `amount` INT NOT NULL,
   `period` INT NOT NULL)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`emails`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`emails` (
-  `landlord_email` VARCHAR(45) NOT NULL,
-  `renter_email` VARCHAR(45) NOT NULL,
-  `message` VARCHAR(120) NOT NULL,
-  PRIMARY KEY (`landlord_email`, `renter_email`),
-  INDEX `fk_landlord_has_renter_renter1_idx` (`renter_email` ASC) VISIBLE,
-  INDEX `fk_landlord_has_renter_landlord1_idx` (`landlord_email` ASC) VISIBLE,
-  CONSTRAINT `fk_landlord_has_renter_landlord1`
-    FOREIGN KEY (`landlord_email`)
-    REFERENCES `mydb`.`landlord` (`email`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_landlord_has_renter_renter1`
-    FOREIGN KEY (`renter_email`)
-    REFERENCES `mydb`.`renter` (`email`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
