@@ -1,6 +1,7 @@
 package controller;
 
 import java.sql.*;
+
 public class DBMS {
     /**Represents the database URL */
     public final String DBURL;
@@ -12,6 +13,7 @@ public class DBMS {
     private Connection dbConnect;
     /**ResultSet Object that will be used to execute SQL commands */
     private ResultSet results;
+    public static String loggedinEmail;
     public DBMS(String dBURL, String username, String password) {
         DBURL = dBURL;
         USERNAME = username;
@@ -38,6 +40,7 @@ public class DBMS {
                 String renterEmail = results.getString("email");
                 String renterPassword = results.getString("password");
                 if (name.equals(renterName) && email.equals(renterEmail) && password.equals(renterPassword)){
+                    loggedinEmail = renterEmail;
                     return true;
                 }
             }
@@ -74,6 +77,7 @@ public class DBMS {
                 String managerEmail = results.getString("email");
                 String managerPassword = results.getString("password");
                 if (name.equals(managerName) && email.equals(managerEmail) && password.equals(managerPassword)){
+                    loggedinEmail = managerEmail;
                     return true;
                 }
             }
@@ -111,6 +115,7 @@ public class DBMS {
                 String landlordEmail = results.getString("email");
                 String landlordPassword = results.getString("password");
                 if (name.equals(landlordName) && email.equals(landlordEmail) && password.equals(landlordPassword)){
+                    loggedinEmail = landlordEmail;
                     return true;
                 }
             }
@@ -140,9 +145,9 @@ public class DBMS {
     }
 
     public void registerProperty(String propertyStatus, String propertyType, int numBedrooms, int numBathrooms, boolean furnished,
-    String quadrant, String address, int id, String landlord_email){
+    String quadrant, String address, String landlord_email){
         try{
-        String query = "INSERT INTO property (propertyStatus, propertyType, numBedrooms, numBathrooms,furnished,quadrant, address, houseIdNum, landlord_email) VALUES (?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO property (propertyStatus, propertyType, numBedrooms, numBathrooms,furnished,quadrant, address, landlord_email) VALUES (?,?,?,?,?,?,?,?)";
         PreparedStatement myStmt = dbConnect.prepareStatement(query);
         myStmt.setString(1, propertyStatus);
         myStmt.setString(2, propertyType);
@@ -151,8 +156,7 @@ public class DBMS {
         myStmt.setBoolean(5, furnished);
         myStmt.setString(6, quadrant);
         myStmt.setString(7, address);
-        myStmt.setInt(8, id);
-        myStmt.setString(9, landlord_email);
+        myStmt.setString(8, landlord_email);
         myStmt.executeUpdate();
 
         myStmt.close();
