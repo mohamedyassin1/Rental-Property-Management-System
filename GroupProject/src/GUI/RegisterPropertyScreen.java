@@ -122,7 +122,7 @@ public class RegisterPropertyScreen implements Component{
 				if (answer4.isSelected()){ furnished = true;}
 				String quandrantInput = String.valueOf(answer5.getSelectedItem());
 				PropertyPostingController posting = new PropertyPostingController("SUSPENDED", propertyTypeInput, numBedroomsInput, numBathroomsInput, furnished, quandrantInput,
-				"123Street", 11, "Moussavi@gmail.com");
+				"123Street",  "Moussavi@gmail.com");
 			}
 		});
 		frame.getContentPane().add(finishRegistration);
