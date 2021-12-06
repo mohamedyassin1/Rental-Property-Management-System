@@ -1,6 +1,7 @@
 package controller;
 
 import java.sql.*;
+
 public class DBMS {
     /**Represents the database URL */
     public final String DBURL;
@@ -12,6 +13,7 @@ public class DBMS {
     private Connection dbConnect;
     /**ResultSet Object that will be used to execute SQL commands */
     private ResultSet results;
+    public static String loggedinEmail;
     public DBMS(String dBURL, String username, String password) {
         DBURL = dBURL;
         USERNAME = username;
@@ -38,6 +40,7 @@ public class DBMS {
                 String renterEmail = results.getString("email");
                 String renterPassword = results.getString("password");
                 if (name.equals(renterName) && email.equals(renterEmail) && password.equals(renterPassword)){
+                    loggedinEmail = renterEmail;
                     return true;
                 }
             }
@@ -74,6 +77,7 @@ public class DBMS {
                 String managerEmail = results.getString("email");
                 String managerPassword = results.getString("password");
                 if (name.equals(managerName) && email.equals(managerEmail) && password.equals(managerPassword)){
+                    loggedinEmail = managerEmail;
                     return true;
                 }
             }
@@ -111,6 +115,7 @@ public class DBMS {
                 String landlordEmail = results.getString("email");
                 String landlordPassword = results.getString("password");
                 if (name.equals(landlordName) && email.equals(landlordEmail) && password.equals(landlordPassword)){
+                    loggedinEmail = landlordEmail;
                     return true;
                 }
             }

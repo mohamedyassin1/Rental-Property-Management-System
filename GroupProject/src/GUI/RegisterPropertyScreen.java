@@ -14,7 +14,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 
+import controller.DBMS;
 import controller.PropertyPostingController;
 
 public class RegisterPropertyScreen implements Component{
@@ -31,7 +33,7 @@ public class RegisterPropertyScreen implements Component{
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();//This gets your screensize
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //when u close, makes the default close operation to exit the frame
 		frame.setLocation(dim.width/2-250, dim.height/2-250); //setting location of where the applicatio
-		frame.setSize(500,500);
+		frame.setSize(500,580);
 		frame.getContentPane().setForeground(new Color(255, 255, 255));
 		frame.getContentPane().setBackground(new Color(255, 255, 255));
 		frame.getContentPane().setLayout(null);
@@ -108,21 +110,32 @@ public class RegisterPropertyScreen implements Component{
 		answer5.setBounds(23, 401, 154, 21);
 		frame.getContentPane().add(answer5);
 		
+		JLabel question6 = new JLabel("Where Is the Property Located?");
+		question6.setFont(new Font("SansSerif", Font.BOLD, 12));
+		question6.setBounds(23, 450, 200, 21);
+		frame.getContentPane().add(question6);
+		
+		JTextField answer6 = new JTextField();
+		answer6.setBackground(new Color(0, 191, 255));
+		answer6.setBounds(23, 480, 200, 23);
+		frame.getContentPane().add(answer6);
+
 		JButton finishRegistration = new JButton("Register");
 		finishRegistration.setBackground(new Color(0, 191, 255));
 		finishRegistration.setForeground(new Color(255, 255, 255));
 		finishRegistration.setFont(new Font("SansSerif", Font.BOLD, 12));
-		finishRegistration.setBounds(286, 401, 161, 21);
+		finishRegistration.setBounds(286, 481, 161, 21);
 		finishRegistration.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String propertyTypeInput = String.valueOf(answer1.getSelectedItem());
 				int numBedroomsInput = Integer.valueOf(String.valueOf(answer2.getSelectedItem()));
 				int numBathroomsInput = Integer.valueOf(String.valueOf(answer3.getSelectedItem()));
+				String address = String.valueOf(answer6.getText());
 				boolean furnished = false;
 				if (answer4.isSelected()){ furnished = true;}
 				String quandrantInput = String.valueOf(answer5.getSelectedItem());
 				PropertyPostingController posting = new PropertyPostingController("SUSPENDED", propertyTypeInput, numBedroomsInput, numBathroomsInput, furnished, quandrantInput,
-				"123Street",  "Moussavi@gmail.com");
+				address, DBMS.loggedinEmail);
 			}
 		});
 		frame.getContentPane().add(finishRegistration);
