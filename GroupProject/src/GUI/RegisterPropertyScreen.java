@@ -143,6 +143,18 @@ public class RegisterPropertyScreen implements Component{
 		});
 		frame.getContentPane().add(finishRegistration);
 		
+		JButton back = new JButton("Go Back");
+		back.setBackground(new Color(0, 191, 255));
+		back.setForeground(new Color(255, 255, 255));
+		back.setFont(new Font("SansSerif", Font.BOLD, 12));
+		back.setBounds(286, 450, 161, 21);
+		back.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Component c = new LandlordScreen();
+			}
+		});
+		frame.getContentPane().add(back);
 		
 		frame.setVisible(true);
 	}
