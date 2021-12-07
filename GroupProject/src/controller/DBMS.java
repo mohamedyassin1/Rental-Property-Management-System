@@ -1,6 +1,7 @@
 package controller;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DBMS {
     /**Represents the database URL */
@@ -144,6 +145,7 @@ public class DBMS {
         }
     }
 
+
     public void registerProperty(String propertyStatus, String propertyType, int numBedrooms, int numBathrooms, boolean furnished,
     String quadrant, String address, String landlord_email){
         try{
@@ -166,6 +168,71 @@ public class DBMS {
             ex.printStackTrace();
         }
 
+    }
+    public String[] getPropertiesOfLandlord(){
+        ArrayList<String> properties = new ArrayList<String>();
+        try {                    
+            Statement myStmt = dbConnect.createStatement();
+            results = myStmt.executeQuery("SELECT * FROM property");
+            
+            while (results.next()){
+                int id = results.getInt("houseIdNum");
+                String landlordEmail = results.getString("landlord_email");
+               
+                if (landlordEmail.equalsIgnoreCase(loggedinEmail)){
+                    properties.add(String.valueOf(id));
+                }
+            }
+            myStmt.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        String[] properties_to_return =  new String[properties.toArray().length];
+        properties.toArray(properties_to_return);
+        return properties_to_return;
+    }
+    public boolean changeStatusOfProperty(int property_id, String newStatus){
+        try {                    
+            Statement myStmt = dbConnect.createStatement();
+            results = myStmt.executeQuery("SELECT * FROM property");
+            
+            while (results.next()){
+                int id = results.getInt("houseIdNum");
+                String status = results.getString("propertyStatus");
+               
+                if (property_id==id && !(status.equals(newStatus))){
+                    String query ="UPDATE property SET propertyStatus = ? WHERE houseIdNum = ?";
+                    PreparedStatement myStmt2 = dbConnect.prepareStatement(query);
+                    myStmt2.setString(1, newStatus);
+                    myStmt2.setInt(2, id);
+                    myStmt2.executeUpdate();
+                    myStmt2.close();
+                    return true;
+                }else if(property_id==id){
+                    return false;
+                }
+            }
+            myStmt.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    public String getFee(){
+        try {                    
+            Statement myStmt = dbConnect.createStatement();
+            results = myStmt.executeQuery("SELECT * FROM fees");
+            
+            while (results.next()){
+                int amount = results.getInt("amount");
+                int period = results.getInt("period");
+                return String.valueOf(amount)+" every "+String.valueOf(period)+ " days.";
+            }
+            myStmt.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return "Free";
     }
     public void close() {
         try {

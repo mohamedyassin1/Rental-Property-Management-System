@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -136,6 +137,8 @@ public class RegisterPropertyScreen implements Component{
 				String quandrantInput = String.valueOf(answer5.getSelectedItem());
 				PropertyPostingController posting = new PropertyPostingController("SUSPENDED", propertyTypeInput, numBedroomsInput, numBathroomsInput, furnished, quandrantInput,
 				address, DBMS.loggedinEmail);
+				JOptionPane.showMessageDialog(frame, "Property is Registered. To have it active please pay the fees for the property");
+				Component c = new LandlordScreen();
 			}
 		});
 		frame.getContentPane().add(finishRegistration);
