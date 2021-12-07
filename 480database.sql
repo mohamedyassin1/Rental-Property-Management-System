@@ -99,6 +99,30 @@ CREATE TABLE IF NOT EXISTS `mydb`.`fees` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `mydb`.`emails`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`emails` (
+  `email_Id` INT NOT NULL AUTO_INCREMENT,
+  `renter_email` VARCHAR(45) NOT NULL,
+  `landlord_email` VARCHAR(45) NOT NULL,
+  `message` VARCHAR(250) NOT NULL,
+  PRIMARY KEY (`email_Id`),
+  INDEX `fk_renter_has_landlord_landlord1_idx` (`landlord_email` ASC) VISIBLE,
+  INDEX `fk_renter_has_landlord_renter1_idx` (`renter_email` ASC) VISIBLE,
+  CONSTRAINT `fk_renter_has_landlord_renter1`
+    FOREIGN KEY (`renter_email`)
+    REFERENCES `mydb`.`renter` (`email`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_renter_has_landlord_landlord1`
+    FOREIGN KEY (`landlord_email`)
+    REFERENCES `mydb`.`landlord` (`email`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

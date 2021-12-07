@@ -10,3 +10,5 @@ VALUES ("ACTIVE","APARTMENT",3, 3, "YES", "SW", "123 center street","Moussavi@gm
 INSERT INTO property(propertyStatus,propertyType,numBedrooms,numBathrooms,furnished,quadrant,address,landlord_email)
 VALUES ("ACTIVE","APARTMENT",2, 1, "NO", "NW", "225 Bay street","Moussavi@gmail.com");
 
+INSERT INTO emails(renter_email, landlord_email, message) VALUES ("Moshipour@gmail.com","Moussavi@gmail.com", "I need a house waddup");
+
