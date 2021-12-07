@@ -46,7 +46,7 @@ public class RegisterPropertyScreen implements Component{
 		
 		JComboBox answer1 = new JComboBox();
 		answer1.setForeground(new Color(255, 255, 255));
-		answer1.setModel(new DefaultComboBoxModel(new String[] {"Apartment", "Townhouse", "Duplex", "Condo", "Studio", "Basement"}));
+		answer1.setModel(new DefaultComboBoxModel(new String[] {"APARTMENT", "TOWNHOUSE", "DUPLEX", "CONDO", "STUDIO", "BASEMENT"}));
 		answer1.setBackground(new Color(0, 191, 255));
 		answer1.setBounds(23, 88, 154, 21);
 		frame.getContentPane().add(answer1);

@@ -218,6 +218,98 @@ public class DBMS {
         }
         return false;
     }
+    public String[][] getActiveProperties(){
+        String[][] activeProperties = new String[0][0];
+        // ArrayList[][] activeProperties = new ArrayList<String, String>();
+        try {                    
+            Statement myStmt = dbConnect.createStatement();
+            results = myStmt.executeQuery("SELECT * FROM property");
+            Statement myStmt2 = dbConnect.createStatement();
+            ResultSet resultSet2 = myStmt2.executeQuery("SELECT * FROM property");
+            int count = 0;
+            while (resultSet2.next()) {
+                if(resultSet2.getString("propertyStatus").equalsIgnoreCase("ACTIVE")){
+                    count++;
+                }
+              
+            } 
+            activeProperties= new String[count][7];
+            int i=0;
+            while (results.next()){
+                int id = results.getInt("houseIdNum");
+                int numBedrooms = results.getInt("numBedrooms");
+                int numBathrooms = results.getInt("numBathrooms");
+                String status = results.getString("propertyStatus");
+                String type = results.getString("propertyType");
+                String furnished = results.getString("furnished");
+                String address = results.getString("address");
+               
+                String quadrant = results.getString("quadrant");
+                if(status.equalsIgnoreCase("ACTIVE")){
+                    activeProperties[i][0] = String.valueOf(id);
+                    activeProperties[i][1] = type;
+                    activeProperties[i][2] = String.valueOf(numBedrooms);
+                    activeProperties[i][3] = String.valueOf(numBathrooms);
+                    activeProperties[i][4] = furnished;
+                    activeProperties[i][5] = quadrant;
+                    activeProperties[i][6] = address;
+    
+                    i++;
+                }
+                
+            }
+            myStmt.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return activeProperties;
+    }
+    public String[][] getCriteriaProperties(String propertyType, int numBeds, int numBaths, String isFurnished, String cityQuadrant){
+        String[][] activeProperties = new String[0][0];
+        // ArrayList[][] activeProperties = new ArrayList<String, String>();
+        try {                    
+            Statement myStmt = dbConnect.createStatement();
+            results = myStmt.executeQuery("SELECT * FROM property");
+            Statement myStmt2 = dbConnect.createStatement();
+            ResultSet resultSet2 = myStmt2.executeQuery("SELECT * FROM property");
+            int count = 0;
+            while (resultSet2.next()) {
+                if(resultSet2.getString("propertyStatus").equalsIgnoreCase("ACTIVE") && resultSet2.getString("furnished").equalsIgnoreCase(isFurnished)&&resultSet2.getString("propertyType").equalsIgnoreCase(propertyType) && resultSet2.getString("quadrant").equalsIgnoreCase(cityQuadrant)&&resultSet2.getInt("numBedrooms")==numBeds && resultSet2.getInt("numBathrooms")==numBaths){
+                    count++;
+                }
+              
+            } 
+            activeProperties= new String[count][7];
+            int i=0;
+            while (results.next()){
+                int id = results.getInt("houseIdNum");
+                int numBedrooms = results.getInt("numBedrooms");
+                int numBathrooms = results.getInt("numBathrooms");
+                String status = results.getString("propertyStatus");
+                String type = results.getString("propertyType");
+                String furnished = results.getString("furnished");
+                String address = results.getString("address");
+               
+                String quadrant = results.getString("quadrant");
+                if(status.equalsIgnoreCase("ACTIVE") && furnished.equalsIgnoreCase(isFurnished)&&type.equalsIgnoreCase(propertyType) && quadrant.equalsIgnoreCase(cityQuadrant)&&numBedrooms==numBeds && numBathrooms==numBaths){
+                    activeProperties[i][0] = String.valueOf(id);
+                    activeProperties[i][1] = type;
+                    activeProperties[i][2] = String.valueOf(numBedrooms);
+                    activeProperties[i][3] = String.valueOf(numBathrooms);
+                    activeProperties[i][4] = furnished;
+                    activeProperties[i][5] = quadrant;
+                    activeProperties[i][6] = address;
+    
+                    i++;
+                }
+                
+            }
+            myStmt.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return activeProperties;
+    }
     public String getFee(){
         try {                    
             Statement myStmt = dbConnect.createStatement();
