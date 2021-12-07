@@ -179,7 +179,7 @@ public class RegisteredRenterScreen implements Component{
 		});
 		Search.setBackground(new Color(0, 191, 255));
 		Search.setFont(new Font("SansSerif", Font.BOLD, 18));
-		Search.setBounds(135, 92, 198, 52);
+		Search.setBounds(167, 88, 142, 44);
 		Search.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(Search);
 		
@@ -215,12 +215,20 @@ public class RegisteredRenterScreen implements Component{
 		returnButton.setBackground(Color.RED);
 		returnButton.setForeground(new Color(255, 255, 255));
 		returnButton.setBounds(10, 123, 115, 21);
+		frame.getContentPane().add(returnButton);
 		returnButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Component c = new MainMenu();
 			}
 		});
-		frame.getContentPane().add(returnButton);
+		
+		JButton saveCriteria = new JButton("Save Filters");
+		saveCriteria.setFont(new Font("SansSerif", Font.BOLD, 10));
+		saveCriteria.setBackground(new Color(0, 191, 255));
+		saveCriteria.setBounds(187, 142, 102, 21);
+		saveCriteria.setForeground(new Color(255, 255, 255));
+		frame.getContentPane().add(saveCriteria);
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //when u close, makes the default close operation to exit the frame
 		frame.setLocation(dim.width/2-250, dim.height/2-250); //setting location of where the applicatio
 		frame.setSize(500,500);
