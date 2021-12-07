@@ -108,6 +108,13 @@ public class EmailSystemScreen implements Component{
 					}
 				}
 				else {
+					String reciever = String.valueOf(landlordRecipient.getText());
+					if(controller.getRenterEmails(reciever)){
+						controller.send(reciever, messageInput, subjectInput);
+						JOptionPane.showMessageDialog(frame, "Email successfully sent");
+					}else{
+						JOptionPane.showMessageDialog(null, "Please Input a Valid Renter Email");
+					}
 					
 				}
 			}
