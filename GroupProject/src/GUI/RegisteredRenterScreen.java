@@ -30,6 +30,7 @@ public class RegisteredRenterScreen implements Component{
 	@Override
 	public void draw() {
 		// TODO Auto-generated method stub
+		frame.setResizable(false);
 		frame.getContentPane().removeAll();
 		frame.getContentPane().revalidate();
 		frame.getContentPane().repaint();

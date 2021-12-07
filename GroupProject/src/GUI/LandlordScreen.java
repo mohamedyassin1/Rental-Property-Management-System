@@ -26,6 +26,7 @@ public class LandlordScreen implements Component{
 	@Override
 	public void draw() {
 		// TODO Auto-generated method stub
+		frame.setResizable(false);
 		frame.getContentPane().removeAll();
 		frame.getContentPane().revalidate();
 		frame.getContentPane().repaint();
@@ -148,6 +149,7 @@ public class LandlordScreen implements Component{
 		frame.getContentPane().add(emails);
 		emails.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Component c = new EmailSystemScreen();
 			}
 		});
 		

@@ -9,7 +9,7 @@ public class ViewSearchCriteria{
 
 
     public ViewSearchCriteria() {
-        db = new DBMS("jdbc:mysql://localhost/mydb", "root", "");
+        db = new DBMS("jdbc:mysql://localhost/mydb", "root", "hello12345");
         // db.registerProperty(propertyStatus, propertyType, numBedrooms, numBathrooms,furnished,
         // quadrant, address, loggedinEmail);
     }

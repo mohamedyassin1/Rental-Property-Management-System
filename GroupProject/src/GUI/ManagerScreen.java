@@ -21,6 +21,7 @@ public class ManagerScreen implements Component {
 		draw();
 	}
 	public void draw() {
+		frame.setResizable(false);
 		frame.getContentPane().removeAll();
 		frame.getContentPane().revalidate();
 		frame.getContentPane().repaint();

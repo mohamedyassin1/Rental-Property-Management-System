@@ -15,6 +15,7 @@ public class DBMS {
     /**ResultSet Object that will be used to execute SQL commands */
     private ResultSet results;
     public static String loggedinEmail;
+    public static String loggedinType;
     public DBMS(String dBURL, String username, String password) {
         DBURL = dBURL;
         USERNAME = username;
@@ -42,6 +43,7 @@ public class DBMS {
                 String renterPassword = results.getString("password");
                 if (name.equals(renterName) && email.equals(renterEmail) && password.equals(renterPassword)){
                     loggedinEmail = renterEmail;
+                    loggedinType = "Renter";
                     return true;
                 }
             }
@@ -79,6 +81,7 @@ public class DBMS {
                 String managerPassword = results.getString("password");
                 if (name.equals(managerName) && email.equals(managerEmail) && password.equals(managerPassword)){
                     loggedinEmail = managerEmail;
+                    loggedinType = "Manager";
                     return true;
                 }
             }
@@ -117,6 +120,7 @@ public class DBMS {
                 String landlordPassword = results.getString("password");
                 if (name.equals(landlordName) && email.equals(landlordEmail) && password.equals(landlordPassword)){
                     loggedinEmail = landlordEmail;
+                    loggedinType = "Landlord";
                     return true;
                 }
             }
@@ -325,6 +329,72 @@ public class DBMS {
             ex.printStackTrace();
         }
         return "Free";
+    }
+    public String getLandlordEmail(int PropertyID) {
+    	try {                    
+    	    Statement myStmt = dbConnect.createStatement();
+    	    results = myStmt.executeQuery("SELECT * FROM property");
+    	    
+    	    while (results.next()){
+    	        int house_num = results.getInt("houseIdNum");
+    	        
+    	        if (house_num == PropertyID){
+    	            return results.getString("landlord_email");
+    	        }
+    	    }
+    	    myStmt.close();
+    	} catch (SQLException ex) {
+    	    ex.printStackTrace();
+    	}
+    	return " ";
+    }
+    public void sendEmail(String recipientEmail, String message, String subject) {
+    	 try {
+             String query = "INSERT INTO emails (renter_email, landlord_email, message) VALUES (?,?,?)";
+             PreparedStatement myStmt = dbConnect.prepareStatement(query);
+             
+             myStmt.setString(1, loggedinEmail);
+             myStmt.setString(2, recipientEmail);
+             myStmt.setString(3, message);
+             myStmt.executeUpdate();
+             myStmt.close();
+
+         } catch (SQLException ex) {
+             ex.printStackTrace();
+         }
+    }
+    public String[][] getEmails(){
+    	 String[][] landlordEmails = new String[0][0];
+         // ArrayList[][] activeProperties = new ArrayList<String, String>();
+         try {                    
+             Statement myStmt = dbConnect.createStatement();
+             results = myStmt.executeQuery("SELECT * FROM emails");
+             Statement myStmt2 = dbConnect.createStatement();
+             ResultSet resultSet2 = myStmt2.executeQuery("SELECT * FROM emails");
+             int count = 0;
+             while (resultSet2.next()) {
+             if (loggedinEmail.equalsIgnoreCase(resultSet2.getString("landlord_email"))) {
+            	 			count++;
+                 }   
+             } 
+             landlordEmails= new String[count][3];
+             int i=0;
+             while (results.next()){
+                 String renter_email = results.getString("renter_email");
+                 String message = results.getString("message");
+                 
+                 if(loggedinEmail.equalsIgnoreCase(results.getString("landlord_email"))){
+                     landlordEmails[i][0] = (renter_email);
+                     //activeProperties[i][1] = subject
+                     landlordEmails[i][2] = message;
+                     i++;
+                 }
+             }
+             myStmt.close();
+         } catch (SQLException ex) {
+             ex.printStackTrace();
+         }
+         return landlordEmails;
     }
     public void close() {
         try {

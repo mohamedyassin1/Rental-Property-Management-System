@@ -30,6 +30,7 @@ public class UnregisteredRenterScreen implements Component{
 	@Override
 	public void draw() {
 		// TODO Auto-generated method stub
+		frame.setResizable(false);
 		frame.getContentPane().removeAll();
 		frame.getContentPane().revalidate();
 		frame.getContentPane().repaint();
@@ -190,18 +191,6 @@ public class UnregisteredRenterScreen implements Component{
 		Unsubscribe.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(Unsubscribe);
 		
-		
-		JButton emailButton = new JButton("Email Landlord");
-		emailButton.setBackground(new Color(0, 191, 255));
-		emailButton.setFont(new Font("SansSerif", Font.BOLD, 10));
-		emailButton.setBounds(358, 123, 118, 21);
-		emailButton.setForeground(new Color(255, 255, 255));
-		frame.getContentPane().add(emailButton);
-		emailButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Component c = new EmailSystemScreen();
-			}
-		});
 		
 		JButton returnButton = new JButton("Main Menu");
 		returnButton.setFont(new Font("SansSerif", Font.BOLD, 10));
