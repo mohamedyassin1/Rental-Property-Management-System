@@ -1,6 +1,9 @@
 package controller;
 
 import model.Email;
+
+import java.util.ArrayList;
+
 import GUI.EmailSystemScreen;
 
 public class EmailController {
@@ -9,7 +12,7 @@ public class EmailController {
     private DBMS db;
     
     public EmailController() {
-    	db = new DBMS("jdbc:mysql://localhost/mydb", "root", "hello12345");
+    	db = new DBMS("jdbc:mysql://localhost/mydb", "root", "");
     }
     public String[] getProperties() {
     	String[][] temp =  db.getActiveProperties();
@@ -24,11 +27,18 @@ public class EmailController {
     	email = new Email(db.loggedinEmail, db.getLandlordEmail(propertyID), message, subject);
     	db.sendEmail(email.getReceiver(), email.getMessage(), email.getSubject());
     }
+    public void send(String renter_email, String message, String subject) {
+    	// email = new Email(db.loggedinEmail, db.getLandlordEmail(propertyID), message, subject);
+    	db.sendEmail(renter_email, message, subject);
+    }
     public String getLandlordEmail() {
     	return email.getReceiver();
     }
     public String getUserType() {
     	return db.loggedinType;
+    }
+    public boolean getRenterEmails(String emailToCheck){
+        return db.getRentersEmails().contains(emailToCheck);
     }
     public String[][] getLandlordInbox(){
     	return db.getEmails();

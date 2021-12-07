@@ -350,12 +350,13 @@ public class DBMS {
     }
     public void sendEmail(String recipientEmail, String message, String subject) {
     	 try {
-             String query = "INSERT INTO emails (renter_email, landlord_email, message) VALUES (?,?,?)";
+             String query = "INSERT INTO emails (reciever_email, sender_email,subject, message) VALUES (?,?,?,?)";
              PreparedStatement myStmt = dbConnect.prepareStatement(query);
              
-             myStmt.setString(1, loggedinEmail);
-             myStmt.setString(2, recipientEmail);
-             myStmt.setString(3, message);
+             myStmt.setString(1, recipientEmail);
+             myStmt.setString(2, loggedinEmail);
+             myStmt.setString(3, subject);
+             myStmt.setString(4, message);
              myStmt.executeUpdate();
              myStmt.close();
 
@@ -373,19 +374,20 @@ public class DBMS {
              ResultSet resultSet2 = myStmt2.executeQuery("SELECT * FROM emails");
              int count = 0;
              while (resultSet2.next()) {
-             if (loggedinEmail.equalsIgnoreCase(resultSet2.getString("landlord_email"))) {
+             if (loggedinEmail.equalsIgnoreCase(resultSet2.getString("reciever_email"))) {
             	 			count++;
                  }   
              } 
              landlordEmails= new String[count][3];
              int i=0;
              while (results.next()){
-                 String renter_email = results.getString("renter_email");
+                 String renter_email = results.getString("sender_email");
                  String message = results.getString("message");
+                 String subject = results.getString("subject");
                  
-                 if(loggedinEmail.equalsIgnoreCase(results.getString("landlord_email"))){
+                 if(loggedinEmail.equalsIgnoreCase(results.getString("reciever_email"))){
                      landlordEmails[i][0] = (renter_email);
-                     //activeProperties[i][1] = subject
+                     landlordEmails[i][1] = subject;
                      landlordEmails[i][2] = message;
                      i++;
                  }
@@ -395,6 +397,27 @@ public class DBMS {
              ex.printStackTrace();
          }
          return landlordEmails;
+    }
+    public ArrayList<String> getRentersEmails(){
+        
+        ArrayList<String> renterEmails = new ArrayList<String>();
+        try {                    
+            Statement myStmt = dbConnect.createStatement();
+            results = myStmt.executeQuery("SELECT * FROM renter");
+            
+            while (results.next()){
+                
+                
+                String email = results.getString("email");
+                renterEmails.add(email);
+                
+            
+            }
+            myStmt.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return renterEmails;
     }
     public void close() {
         try {
