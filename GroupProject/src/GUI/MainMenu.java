@@ -2,13 +2,10 @@ package GUI;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.text.AttributeSet.ColorAttribute;
 import controller.*;
-import model.*;
-import GUI.Component;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 public class MainMenu implements Component{
 	public static String dbUsernameInput;
 	public static String dbPasswordInput;
