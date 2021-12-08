@@ -616,6 +616,22 @@ public class DBMS {
              }
                  return propertyInfo;
     }
+    public void updateFee(int amount, int period){
+        
+        try{
+            String query ="UPDATE fees SET amount = ?, period = ? WHERE amount = ?";
+            PreparedStatement myStmt = dbConnect.prepareStatement(query);
+            myStmt.setInt(1, amount);
+            myStmt.setInt(2, period);
+            myStmt.setInt(3, currFee);
+            myStmt.executeUpdate();
+            currFee = amount;
+            myStmt.close();
+        }catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+    }
     public void close() {
         try {
             results.close();
