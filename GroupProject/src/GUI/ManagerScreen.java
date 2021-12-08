@@ -8,7 +8,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-import controller.DBCViewController;
+import controller.*;
 
 import java.awt.Color;
 import java.awt.Dimension;
