@@ -8,9 +8,9 @@ public class PropertyPostingController{
     private DBMS db;
 
 
-    public PropertyPostingController(String propertyStatus, String propertyType, int numBedrooms, int numBathrooms, boolean furnished,
+    public PropertyPostingController(String propertyStatus, String propertyType, int numBedrooms, int numBathrooms, String furnished,
     String quadrant, String address, String loggedinEmail) {
-        db = new DBMS("jdbc:mysql://localhost/mydb", "root", "hello12345");
+        db = new DBMS("jdbc:mysql://localhost/mydb", "root", "");
         db.registerProperty(propertyStatus, propertyType, numBedrooms, numBathrooms,furnished,
         quadrant, address, loggedinEmail);
     }

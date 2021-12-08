@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -19,6 +20,7 @@ import javax.swing.JTable;
 import javax.swing.SpringLayout;
 import javax.swing.table.DefaultTableModel;
 
+import controller.NotificationController;
 import controller.ViewSearchCriteria;
 
 public class RegisteredRenterScreen implements Component{
@@ -196,7 +198,11 @@ public class RegisteredRenterScreen implements Component{
 		viewNotifications.setBounds(10, 92, 115, 21);
 		viewNotifications.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(viewNotifications);
-		
+		viewNotifications.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Component c = new NotificationScreen();
+			}
+		});
 		JButton emailButton = new JButton("Email Landlord");
 		emailButton.setBackground(new Color(0, 191, 255));
 		emailButton.setFont(new Font("SansSerif", Font.BOLD, 10));
@@ -228,6 +234,21 @@ public class RegisteredRenterScreen implements Component{
 		saveCriteria.setBounds(187, 142, 102, 21);
 		saveCriteria.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(saveCriteria);
+		saveCriteria.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String propertyTypeInput = String.valueOf(PropertyType.getSelectedItem());
+				int numBedroomsInput = Integer.valueOf(String.valueOf(NumBedrooms.getSelectedItem()));
+				int numBathroomsInput = Integer.valueOf(String.valueOf(NumBathrooms.getSelectedItem()));
+				String quadrantTypeInput = String.valueOf(Quadrant.getSelectedItem());
+				String furnishedInput = "NO";
+				if(Furnished.isSelected()){
+					furnishedInput = "YES";
+				}
+				NotificationController n = new NotificationController();
+				n.saveCriteria(propertyTypeInput, numBedroomsInput, numBathroomsInput, furnishedInput, quadrantTypeInput);
+				JOptionPane.showMessageDialog(null, "Search Criteria has been saved.");
+			}
+		});
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //when u close, makes the default close operation to exit the frame
 		frame.setLocation(dim.width/2-250, dim.height/2-250); //setting location of where the applicatio
