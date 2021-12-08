@@ -534,6 +534,88 @@ public class DBMS {
         }
         return activeNotifications;
     }
+    public ArrayList<String> getRenterInfo() {
+    	ArrayList<String> listOfRenters = new ArrayList<String>();
+    	  try {                    
+              Statement myStmt = dbConnect.createStatement();
+              results = myStmt.executeQuery("SELECT * FROM renter");
+              while (results.next()){
+                  listOfRenters.add(" | Email: " + results.getString("email") + " | Name: " + results.getString("name"));
+              }
+              myStmt.close();
+    	  }
+    	  catch (SQLException ex) {
+              ex.printStackTrace();
+          }
+              return listOfRenters;
+    }
+    public ArrayList<String> getLandlordInfo(){
+    	ArrayList<String> landlordEmails = new ArrayList<String>();
+    	ArrayList<String> landlordInfo = new ArrayList<String>();
+    	 try {                    
+             Statement myStmt = dbConnect.createStatement();
+             results = myStmt.executeQuery("SELECT * FROM landlord");
+             Statement myStmt2 = dbConnect.createStatement();
+             ResultSet resultSet2 = myStmt2.executeQuery("SELECT * FROM property");
+             while (results.next()) {
+            	 landlordEmails.add(results.getString("email"));
+            	 landlordInfo.add(" | Email: " + results.getString("email") + " | Name: " + results.getString("name") + " | Properties Owned: ");
+             }
+             while (resultSet2.next()) {
+            	 if (landlordEmails.contains(resultSet2.getString("landlord_email"))) {
+            		 int index = landlordEmails.indexOf(resultSet2.getString("landlord_email"));
+            		 landlordInfo.set(index, landlordInfo.get(index) + " PropertyID#" + String.valueOf(resultSet2.getInt("houseIdNum")));
+            	 }
+             }
+             myStmt.close();
+   	  }
+   	  catch (SQLException ex) {
+             ex.printStackTrace();
+         }
+             return landlordInfo;
+    }
+    public String[][] getPropertyInfo(){
+    	String[][] propertyInfo = new String[0][0];
+    	 try {                    
+             Statement myStmt = dbConnect.createStatement();
+             results = myStmt.executeQuery("SELECT * FROM property");
+             Statement myStmt2 = dbConnect.createStatement();
+             ResultSet resultSet2 = myStmt2.executeQuery("SELECT * FROM property");
+             int count = 0;
+             while (results.next()) {
+            	 count++;
+             }
+             propertyInfo = new String[count][9];
+             int i = 0;
+             while (resultSet2.next()) {
+            	 String propertyStatus = resultSet2.getString("propertyStatus");
+            	 String propertyType = resultSet2.getString("propertyType");
+            	 String numBedrooms = String.valueOf(resultSet2.getInt("numBedrooms"));
+            	 String numBathrooms = String.valueOf(resultSet2.getInt("numBathrooms"));
+            	 String furnished = resultSet2.getString("furnished");
+            	 String quadrant = resultSet2.getString("quadrant");
+            	 String address = resultSet2.getString("address");
+            	 String houseIdNum = String.valueOf(resultSet2.getInt("houseIdNum"));
+            	 String landlordEmail = resultSet2.getString("landlord_email");
+
+            	 propertyInfo[i][0] = propertyStatus;
+            	 propertyInfo[i][1] = propertyType;
+            	 propertyInfo[i][2] = numBedrooms;
+            	 propertyInfo[i][3] = numBathrooms;
+            	 propertyInfo[i][4] = furnished;
+            	 propertyInfo[i][5] = quadrant;
+            	 propertyInfo[i][6] = address;
+            	 propertyInfo[i][7] = houseIdNum;
+            	 propertyInfo[i][8] = landlordEmail;
+            	 i++;
+             }
+             myStmt.close();
+    	 }
+             catch (SQLException ex) {
+                 ex.printStackTrace();
+             }
+                 return propertyInfo;
+    }
     public void close() {
         try {
             results.close();

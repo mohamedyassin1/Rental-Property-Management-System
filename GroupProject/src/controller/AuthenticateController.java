@@ -24,7 +24,9 @@ public class AuthenticateController {
         db = new DBMS("jdbc:mysql://localhost/mydb", MainMenu.dbUsernameInput, MainMenu.dbPasswordInput);
         
     }
-    
+    public AuthenticateController() {
+    	db = new DBMS("jdbc:mysql://localhost/mydb", MainMenu.dbUsernameInput, MainMenu.dbPasswordInput);
+    }
     public boolean login(){
         //get user
         if(userType.equalsIgnoreCase("renter")){

@@ -35,7 +35,7 @@ public class EmailSystemScreen implements Component{
 	@SuppressWarnings("serial")
 	@Override
 	public void draw() {
-		emailFrame = new JFrame();
+		emailFrame = new JFrame("Email System");
 		emailFrame.setResizable(false);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();//This gets your screensize
 		emailFrame.setLocation(dim.width/2-250, dim.height/2-250); 
