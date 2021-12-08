@@ -30,7 +30,6 @@ public class UnregisteredRenterScreen implements Component{
 	@Override
 	public void draw() {
 		// TODO Auto-generated method stub
-		frame.setTitle("Guest login");
 		frame.setResizable(false);
 		frame.getContentPane().removeAll();
 		frame.getContentPane().revalidate();

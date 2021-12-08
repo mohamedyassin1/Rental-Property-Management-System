@@ -16,7 +16,6 @@ public class MainMenu implements Component{
 	@Override
 	public void draw() {
 		//Frame setup
-		frame.setTitle("Main Menu");
 		frame.setResizable(false);
 		frame.getContentPane().removeAll();
 		frame.getContentPane().revalidate();
@@ -52,7 +51,7 @@ public class MainMenu implements Component{
 		
 		JLabel passwordLabel = new JLabel("Password");
 		passwordLabel.setFont(new Font("SansSerif", Font.BOLD, 16));
-		passwordLabel.setBounds(103, 275, 85, 20);
+		passwordLabel.setBounds(103, 275, 85, 13);
 		frame.getContentPane().add(passwordLabel);
 		
 		JTextField email = new JTextField();
@@ -84,8 +83,6 @@ public class MainMenu implements Component{
 		frame.getContentPane().add(register);
 		register.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dbUsernameInput = sqlUsername.getText();
-				dbPasswordInput = String.valueOf(sqlPassword.getPassword());
 				String nameInput = name.getText();
 				String passwordInput = String.valueOf(password.getPassword());
 				String emailInput = email.getText();
@@ -109,14 +106,7 @@ public class MainMenu implements Component{
 		frame.getContentPane().add(guestLogin);
 		guestLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-<<<<<<< Updated upstream
 				Component c = new UnregisteredRenterScreen();
-=======
-				dbUsernameInput = sqlUsername.getText();
-				dbPasswordInput = String.valueOf(sqlPassword.getPassword());
-				AuthenticateController authenticate = new AuthenticateController();
-			    Component c = new UnregisteredRenterScreen();
->>>>>>> Stashed changes
 			}
 		});
 	

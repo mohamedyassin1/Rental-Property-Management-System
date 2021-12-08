@@ -4,24 +4,15 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.ScrollPaneConstants;
-
-import controller.DBCViewController;
-
 import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import java.awt.Toolkit;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 
@@ -30,7 +21,6 @@ public class ManagerScreen implements Component {
 		draw();
 	}
 	public void draw() {
-		frame.setTitle("Manager");
 		frame.setResizable(false);
 		frame.getContentPane().removeAll();
 		frame.getContentPane().revalidate();
@@ -95,18 +85,8 @@ public class ManagerScreen implements Component {
 		frame.getContentPane().add(generateSummary);
 		
 		JButton renterInfo = new JButton("Renter Information");
-		DBCViewController viewer = new DBCViewController();
 		renterInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ArrayList<String> renterInfo = viewer.getRenterInfo();
-				String renterInfoDisplay = new String();
-				for (int i= 0; i < renterInfo.size(); i++)
-				{
-					renterInfoDisplay = renterInfoDisplay.concat("Renter Number " + i);
-					renterInfoDisplay = renterInfoDisplay.concat(renterInfo.get(i));
-					renterInfoDisplay = renterInfoDisplay.concat("\n");
-				}
-				JOptionPane.showMessageDialog(frame, renterInfoDisplay);
 			}
 		});
 		renterInfo.setForeground(Color.WHITE);
@@ -121,19 +101,6 @@ public class ManagerScreen implements Component {
 		landlordInfo.setBackground(new Color(0, 191, 255));
 		landlordInfo.setBounds(232, 157, 194, 28);
 		frame.getContentPane().add(landlordInfo);
-		landlordInfo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ArrayList<String> landlordInfo = viewer.getLandlordInfo();
-				String landlordInfoDisplay = new String();
-				for (int i= 0; i < landlordInfo.size(); i++)
-				{
-					landlordInfoDisplay = landlordInfoDisplay.concat("Landlord Number " + i + ": ");
-					landlordInfoDisplay = landlordInfoDisplay.concat(landlordInfo.get(i));
-					landlordInfoDisplay = landlordInfoDisplay.concat("\n");
-				}
-				JOptionPane.showMessageDialog(frame, landlordInfoDisplay);
-			}
-		});
 		
 		JButton propertyInfo = new JButton("Property Information");
 		propertyInfo.setForeground(Color.WHITE);
@@ -141,25 +108,7 @@ public class ManagerScreen implements Component {
 		propertyInfo.setBackground(new Color(0, 191, 255));
 		propertyInfo.setBounds(232, 201, 194, 28);
 		frame.getContentPane().add(propertyInfo);
-		propertyInfo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String[][] propertyInfo = viewer.getPropertyInfo();
-				String[] columns = {"PropertyStatus", "PropertyType", "NumBedrooms", "NumBathrooms", "Furnished", "Quadrant", "Address", "HouseIDNum", "Landlord Email"}; 
-				JTable table = new JTable(propertyInfo, columns);
-				table.getColumnModel().getColumn(0).setPreferredWidth(100);
-				table.getColumnModel().getColumn(1).setPreferredWidth(100);
-				table.getColumnModel().getColumn(2).setPreferredWidth(100);
-				table.getColumnModel().getColumn(3).setPreferredWidth(100);
-				table.getColumnModel().getColumn(4).setPreferredWidth(100);
-				table.getColumnModel().getColumn(5).setPreferredWidth(100);
-				table.getColumnModel().getColumn(6).setPreferredWidth(100);
-				table.getColumnModel().getColumn(7).setPreferredWidth(100);
-				table.getColumnModel().getColumn(8).setPreferredWidth(200);
-				JScrollPane scrollableTable = new JScrollPane(table);
-				scrollableTable.setPreferredSize(new Dimension(900,400));
-				JOptionPane.showMessageDialog(frame, scrollableTable);
-			}
-		});
+		
 		JButton btnLogout = new JButton("Logout");
 		btnLogout.setForeground(Color.WHITE);
 		btnLogout.setFont(new Font("SansSerif", Font.BOLD, 12));
