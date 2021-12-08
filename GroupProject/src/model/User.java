@@ -2,8 +2,6 @@ package model;
 
 //Finished
 public abstract class User{
-    private static int count = 1000;
-    private int id;
     protected String email;
     protected String password;
     protected String name;
@@ -11,7 +9,6 @@ public abstract class User{
         this.email = email;
         this.password = password;
         this.name = name;
-        id = count++;
     }
     public User() {
         this.name = "guest";
@@ -35,9 +32,7 @@ public abstract class User{
     public void setName(String name) {
         this.name = name;
     }
-    public int getId() {
-        return id;
-    }
+    
 
     
 }
