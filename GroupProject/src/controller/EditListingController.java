@@ -31,12 +31,25 @@ public class EditListingController{
         return propertyIds;
     }
     public boolean payFee(int house_id){
-        return db.changeStatusOfProperty(house_id, "ACTIVE");
+        boolean to_return = db.changeStatusOfProperty(house_id, "ACTIVE");
+        if(to_return == true){
+            db.addNotifications(house_id);
+        }
+        
+        return to_return;
     }
     public String getFee(){
         return "$"+db.getFee();
     }
     public boolean changeStatus(int house_id, String Status){
+        if(Status.equalsIgnoreCase("ACTIVE"){
+            boolean to_return = db.changeStatusOfProperty(house_id, "ACTIVE");
+            if(to_return == true){
+                db.addNotifications(house_id);
+            }
+
+            return to_return;
+        }
         return db.changeStatusOfProperty(house_id, Status);
     }
     public void setPropertyModel(Property propertyModel) {
