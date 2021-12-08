@@ -19,4 +19,7 @@ public class DBCViewController {
 	public String[][] getPropertyInfo(){
 		return db.getPropertyInfo();
 	}
+	public void changeFees(int amount, int period){
+        	db.updateFee(amount, period);
+    	}	
 }
