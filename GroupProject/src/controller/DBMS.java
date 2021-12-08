@@ -640,6 +640,22 @@ public class DBMS {
         }
         
     }
+    public void removeRenter(){
+        try {
+            String query = "DELETE FROM renter WHERE email = ?";
+            PreparedStatement myStmt = dbConnect.prepareStatement(query);
+
+            myStmt.setString(1, loggedinEmail);
+                        
+            myStmt.executeUpdate();
+            //System.out.println("Rows affected: " + rowCount);
+            
+            myStmt.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
     public void close() {
         try {
             results.close();
