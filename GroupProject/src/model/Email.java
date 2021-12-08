@@ -1,31 +1,35 @@
 package model;
 
 public class Email {
-    private User sender;
-    private User receiver;
+    private String sender;
+    private String receiver;
     private String message;
+    private String subject;
     // private Property m;
-    public Email(User sender, User receiver, String msg){
+    public Email(String sender, String receiver, String msg, String subj){
         this.sender = sender;
         this.receiver = receiver;
         this.message = msg;
+        this.subject = subj;
     }
     public void send(){
         
     }
-    public User getSender() {
+    public String getSender() {
         return sender;
     }
 
-    public User getReceiver() {
+    public String getReceiver() {
         return receiver;
     }
-
-    public void setSender(User sender) {
+    public String getSubject() {
+        return subject;
+    }
+    public void setSender(String sender) {
         this.sender = sender;
     }
 
-    public void setReceiver(User receiver) {
+    public void setReceiver(String receiver) {
         this.receiver = receiver;
     }
     public String getMessage() {
@@ -33,6 +37,9 @@ public class Email {
     }
     public void setMessage(String message) {
         this.message = message;
+    }
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
     
 }

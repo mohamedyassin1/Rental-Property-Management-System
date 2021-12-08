@@ -3,20 +3,28 @@ package controller;
 import java.util.ArrayList;
 import model.*;
 import model.Property;
-public class PropertyPostingController{
+public class EditListingController{
     private Property propertyModel;
     private DBMS db;
 
 
-    public PropertyPostingController(String propertyStatus, String propertyType, int numBedrooms, int numBathrooms, boolean furnished,
-    String quadrant, String address, String loggedinEmail) {
+    public EditListingController() {
         db = new DBMS("jdbc:mysql://localhost/mydb", "root", "hello12345");
-        db.registerProperty(propertyStatus, propertyType, numBedrooms, numBathrooms,furnished,
-        quadrant, address, loggedinEmail);
+        // db.registerProperty(propertyStatus, propertyType, numBedrooms, numBathrooms,furnished,
+        // quadrant, address, loggedinEmail);
     }
 
-    public Property getPropertyModel() {
-        return propertyModel;
+    public String[] getProperties() {
+        return db.getPropertiesOfLandlord();
+    }
+    public boolean payFee(int house_id){
+        return db.changeStatusOfProperty(house_id, "ACTIVE");
+    }
+    public String getFee(){
+        return "$"+db.getFee();
+    }
+    public boolean changeStatus(int house_id, String Status){
+        return db.changeStatusOfProperty(house_id, Status);
     }
     public void setPropertyModel(Property propertyModel) {
         this.propertyModel = propertyModel;

@@ -19,6 +19,8 @@ import javax.swing.JTable;
 import javax.swing.SpringLayout;
 import javax.swing.table.DefaultTableModel;
 
+import controller.ViewSearchCriteria;
+
 public class RegisteredRenterScreen implements Component{
 	RegisteredRenterScreen() {
 		draw();
@@ -28,6 +30,7 @@ public class RegisteredRenterScreen implements Component{
 	@Override
 	public void draw() {
 		// TODO Auto-generated method stub
+		frame.setResizable(false);
 		frame.getContentPane().removeAll();
 		frame.getContentPane().revalidate();
 		frame.getContentPane().repaint();
@@ -43,33 +46,17 @@ public class RegisteredRenterScreen implements Component{
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 238, 466, 215);
 		frame.getContentPane().add(scrollPane);
-		
+		ViewSearchCriteria v = new ViewSearchCriteria();
 		JTable table = new JTable();
 		table.setBackground(new Color(255, 255, 255));
 		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-			},
+			v.getActiveProperties(),
 			new String[] {
 				"PropertyID", "Property Type", "#Bedrooms", "#Bathrooms", "Furnished", "Quadrant"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				Integer.class, String.class, Integer.class, Integer.class, Boolean.class, String.class
+				String.class, String.class,String.class, String.class, String.class, String.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
@@ -97,7 +84,7 @@ public class RegisteredRenterScreen implements Component{
 		Title.setFont(new Font("SansSerif", Font.BOLD, 24));
 		
 		JComboBox PropertyType = new JComboBox();
-		PropertyType.setModel(new DefaultComboBoxModel(new String[] {"Apartment", "Townhouse", "Duplex", "Condo", "Studio", "Basement"}));
+		PropertyType.setModel(new DefaultComboBoxModel(new String[] {"APARTMENT", "TOWNHOUSE", "DUPLEX", "CONDO", "STUDIO", "BASEMENT"}));
 		PropertyType.setBackground(new Color(0, 191, 255));
 		PropertyType.setFont(new Font("SansSerif", Font.PLAIN, 12));
 		PropertyType.setBounds(10, 192, 73, 21);
@@ -157,11 +144,42 @@ public class RegisteredRenterScreen implements Component{
 		JButton Search = new JButton("Search");
 		Search.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String propertyTypeInput = String.valueOf(PropertyType.getSelectedItem());
+				int numBedroomsInput = Integer.valueOf(String.valueOf(NumBedrooms.getSelectedItem()));
+				int numBathroomsInput = Integer.valueOf(String.valueOf(NumBathrooms.getSelectedItem()));
+				String quadrantTypeInput = String.valueOf(Quadrant.getSelectedItem());
+				String furnishedInput = "NO";
+				if(Furnished.isSelected()){
+					furnishedInput = "YES";
+				}
+				// v.getCriteriaProperties(propertyTypeInput, numBedroomsInput, numBathroomsInput, furnishedInput, quadrantTypeInput);
+				JTable table = new JTable();
+				table.setBackground(new Color(255, 255, 255));
+				table.setModel(new DefaultTableModel(
+					v.getCriteriaProperties(propertyTypeInput, numBedroomsInput, numBathroomsInput, furnishedInput, quadrantTypeInput),
+					new String[] {
+						"PropertyID", "Property Type", "#Bedrooms", "#Bathrooms", "Furnished", "Quadrant"
+					}
+				) {
+					Class[] columnTypes = new Class[] {
+						String.class, String.class,String.class, String.class, String.class, String.class
+					};
+					public Class getColumnClass(int columnIndex) {
+						return columnTypes[columnIndex];
+					}
+				});
+				table.getColumnModel().getColumn(0).setPreferredWidth(65);
+				table.getColumnModel().getColumn(1).setPreferredWidth(90);
+				table.getColumnModel().getColumn(2).setPreferredWidth(63);
+				table.getColumnModel().getColumn(3).setPreferredWidth(66);
+				table.getColumnModel().getColumn(4).setPreferredWidth(55);
+				table.getColumnModel().getColumn(5).setPreferredWidth(52);
+				scrollPane.setViewportView(table);
 			}
 		});
 		Search.setBackground(new Color(0, 191, 255));
 		Search.setFont(new Font("SansSerif", Font.BOLD, 18));
-		Search.setBounds(135, 92, 198, 52);
+		Search.setBounds(167, 88, 142, 44);
 		Search.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(Search);
 		
@@ -197,12 +215,20 @@ public class RegisteredRenterScreen implements Component{
 		returnButton.setBackground(Color.RED);
 		returnButton.setForeground(new Color(255, 255, 255));
 		returnButton.setBounds(10, 123, 115, 21);
+		frame.getContentPane().add(returnButton);
 		returnButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Component c = new MainMenu();
 			}
 		});
-		frame.getContentPane().add(returnButton);
+		
+		JButton saveCriteria = new JButton("Save Filters");
+		saveCriteria.setFont(new Font("SansSerif", Font.BOLD, 10));
+		saveCriteria.setBackground(new Color(0, 191, 255));
+		saveCriteria.setBounds(187, 142, 102, 21);
+		saveCriteria.setForeground(new Color(255, 255, 255));
+		frame.getContentPane().add(saveCriteria);
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //when u close, makes the default close operation to exit the frame
 		frame.setLocation(dim.width/2-250, dim.height/2-250); //setting location of where the applicatio
 		frame.setSize(500,500);

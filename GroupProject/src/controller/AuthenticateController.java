@@ -21,7 +21,7 @@ public class AuthenticateController {
         }else if(userType.equalsIgnoreCase("manager")){
             user = new Manager(email, name, password);
         }
-        db = new DBMS("jdbc:mysql://localhost/mydb", "root", "");
+        db = new DBMS("jdbc:mysql://localhost/mydb", "root", "hello12345");
         
     }
     

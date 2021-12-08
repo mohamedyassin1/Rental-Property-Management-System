@@ -1,6 +1,7 @@
 package controller;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DBMS {
     /**Represents the database URL */
@@ -14,6 +15,7 @@ public class DBMS {
     /**ResultSet Object that will be used to execute SQL commands */
     private ResultSet results;
     public static String loggedinEmail;
+    public static String loggedinType;
     public DBMS(String dBURL, String username, String password) {
         DBURL = dBURL;
         USERNAME = username;
@@ -41,6 +43,7 @@ public class DBMS {
                 String renterPassword = results.getString("password");
                 if (name.equals(renterName) && email.equals(renterEmail) && password.equals(renterPassword)){
                     loggedinEmail = renterEmail;
+                    loggedinType = "Renter";
                     return true;
                 }
             }
@@ -78,6 +81,7 @@ public class DBMS {
                 String managerPassword = results.getString("password");
                 if (name.equals(managerName) && email.equals(managerEmail) && password.equals(managerPassword)){
                     loggedinEmail = managerEmail;
+                    loggedinType = "Manager";
                     return true;
                 }
             }
@@ -116,6 +120,7 @@ public class DBMS {
                 String landlordPassword = results.getString("password");
                 if (name.equals(landlordName) && email.equals(landlordEmail) && password.equals(landlordPassword)){
                     loggedinEmail = landlordEmail;
+                    loggedinType = "Landlord";
                     return true;
                 }
             }
@@ -144,6 +149,7 @@ public class DBMS {
         }
     }
 
+
     public void registerProperty(String propertyStatus, String propertyType, int numBedrooms, int numBathrooms, boolean furnished,
     String quadrant, String address, String landlord_email){
         try{
@@ -166,6 +172,252 @@ public class DBMS {
             ex.printStackTrace();
         }
 
+    }
+    public String[] getPropertiesOfLandlord(){
+        ArrayList<String> properties = new ArrayList<String>();
+        try {                    
+            Statement myStmt = dbConnect.createStatement();
+            results = myStmt.executeQuery("SELECT * FROM property");
+            
+            while (results.next()){
+                int id = results.getInt("houseIdNum");
+                String landlordEmail = results.getString("landlord_email");
+               
+                if (landlordEmail.equalsIgnoreCase(loggedinEmail)){
+                    properties.add(String.valueOf(id));
+                }
+            }
+            myStmt.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        String[] properties_to_return =  new String[properties.toArray().length];
+        properties.toArray(properties_to_return);
+        return properties_to_return;
+    }
+    public boolean changeStatusOfProperty(int property_id, String newStatus){
+        try {                    
+            Statement myStmt = dbConnect.createStatement();
+            results = myStmt.executeQuery("SELECT * FROM property");
+            
+            while (results.next()){
+                int id = results.getInt("houseIdNum");
+                String status = results.getString("propertyStatus");
+               
+                if (property_id==id && !(status.equals(newStatus))){
+                    String query ="UPDATE property SET propertyStatus = ? WHERE houseIdNum = ?";
+                    PreparedStatement myStmt2 = dbConnect.prepareStatement(query);
+                    myStmt2.setString(1, newStatus);
+                    myStmt2.setInt(2, id);
+                    myStmt2.executeUpdate();
+                    myStmt2.close();
+                    return true;
+                }else if(property_id==id){
+                    return false;
+                }
+            }
+            myStmt.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    public String[][] getActiveProperties(){
+        String[][] activeProperties = new String[0][0];
+        // ArrayList[][] activeProperties = new ArrayList<String, String>();
+        try {                    
+            Statement myStmt = dbConnect.createStatement();
+            results = myStmt.executeQuery("SELECT * FROM property");
+            Statement myStmt2 = dbConnect.createStatement();
+            ResultSet resultSet2 = myStmt2.executeQuery("SELECT * FROM property");
+            int count = 0;
+            while (resultSet2.next()) {
+                if(resultSet2.getString("propertyStatus").equalsIgnoreCase("ACTIVE")){
+                    count++;
+                }
+              
+            } 
+            activeProperties= new String[count][7];
+            int i=0;
+            while (results.next()){
+                int id = results.getInt("houseIdNum");
+                int numBedrooms = results.getInt("numBedrooms");
+                int numBathrooms = results.getInt("numBathrooms");
+                String status = results.getString("propertyStatus");
+                String type = results.getString("propertyType");
+                String furnished = results.getString("furnished");
+                String address = results.getString("address");
+               
+                String quadrant = results.getString("quadrant");
+                if(status.equalsIgnoreCase("ACTIVE")){
+                    activeProperties[i][0] = String.valueOf(id);
+                    activeProperties[i][1] = type;
+                    activeProperties[i][2] = String.valueOf(numBedrooms);
+                    activeProperties[i][3] = String.valueOf(numBathrooms);
+                    activeProperties[i][4] = furnished;
+                    activeProperties[i][5] = quadrant;
+                    activeProperties[i][6] = address;
+    
+                    i++;
+                }
+                
+            }
+            myStmt.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return activeProperties;
+    }
+    public String[][] getCriteriaProperties(String propertyType, int numBeds, int numBaths, String isFurnished, String cityQuadrant){
+        String[][] activeProperties = new String[0][0];
+        // ArrayList[][] activeProperties = new ArrayList<String, String>();
+        try {                    
+            Statement myStmt = dbConnect.createStatement();
+            results = myStmt.executeQuery("SELECT * FROM property");
+            Statement myStmt2 = dbConnect.createStatement();
+            ResultSet resultSet2 = myStmt2.executeQuery("SELECT * FROM property");
+            int count = 0;
+            while (resultSet2.next()) {
+                if(resultSet2.getString("propertyStatus").equalsIgnoreCase("ACTIVE") && resultSet2.getString("furnished").equalsIgnoreCase(isFurnished)&&resultSet2.getString("propertyType").equalsIgnoreCase(propertyType) && resultSet2.getString("quadrant").equalsIgnoreCase(cityQuadrant)&&resultSet2.getInt("numBedrooms")==numBeds && resultSet2.getInt("numBathrooms")==numBaths){
+                    count++;
+                }
+              
+            } 
+            activeProperties= new String[count][7];
+            int i=0;
+            while (results.next()){
+                int id = results.getInt("houseIdNum");
+                int numBedrooms = results.getInt("numBedrooms");
+                int numBathrooms = results.getInt("numBathrooms");
+                String status = results.getString("propertyStatus");
+                String type = results.getString("propertyType");
+                String furnished = results.getString("furnished");
+                String address = results.getString("address");
+               
+                String quadrant = results.getString("quadrant");
+                if(status.equalsIgnoreCase("ACTIVE") && furnished.equalsIgnoreCase(isFurnished)&&type.equalsIgnoreCase(propertyType) && quadrant.equalsIgnoreCase(cityQuadrant)&&numBedrooms==numBeds && numBathrooms==numBaths){
+                    activeProperties[i][0] = String.valueOf(id);
+                    activeProperties[i][1] = type;
+                    activeProperties[i][2] = String.valueOf(numBedrooms);
+                    activeProperties[i][3] = String.valueOf(numBathrooms);
+                    activeProperties[i][4] = furnished;
+                    activeProperties[i][5] = quadrant;
+                    activeProperties[i][6] = address;
+    
+                    i++;
+                }
+                
+            }
+            myStmt.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return activeProperties;
+    }
+    public String getFee(){
+        try {                    
+            Statement myStmt = dbConnect.createStatement();
+            results = myStmt.executeQuery("SELECT * FROM fees");
+            
+            while (results.next()){
+                int amount = results.getInt("amount");
+                int period = results.getInt("period");
+                return String.valueOf(amount)+" every "+String.valueOf(period)+ " days.";
+            }
+            myStmt.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return "Free";
+    }
+    public String getLandlordEmail(int PropertyID) {
+    	try {                    
+    	    Statement myStmt = dbConnect.createStatement();
+    	    results = myStmt.executeQuery("SELECT * FROM property");
+    	    
+    	    while (results.next()){
+    	        int house_num = results.getInt("houseIdNum");
+    	        
+    	        if (house_num == PropertyID){
+    	            return results.getString("landlord_email");
+    	        }
+    	    }
+    	    myStmt.close();
+    	} catch (SQLException ex) {
+    	    ex.printStackTrace();
+    	}
+    	return " ";
+    }
+    public void sendEmail(String recipientEmail, String message, String subject) {
+    	 try {
+             String query = "INSERT INTO emails (reciever_email, sender_email,subject, message) VALUES (?,?,?,?)";
+             PreparedStatement myStmt = dbConnect.prepareStatement(query);
+             
+             myStmt.setString(1, recipientEmail);
+             myStmt.setString(2, loggedinEmail);
+             myStmt.setString(3, subject);
+             myStmt.setString(4, message);
+             myStmt.executeUpdate();
+             myStmt.close();
+
+         } catch (SQLException ex) {
+             ex.printStackTrace();
+         }
+    }
+    public String[][] getEmails(){
+    	 String[][] landlordEmails = new String[0][0];
+         // ArrayList[][] activeProperties = new ArrayList<String, String>();
+         try {                    
+             Statement myStmt = dbConnect.createStatement();
+             results = myStmt.executeQuery("SELECT * FROM emails");
+             Statement myStmt2 = dbConnect.createStatement();
+             ResultSet resultSet2 = myStmt2.executeQuery("SELECT * FROM emails");
+             int count = 0;
+             while (resultSet2.next()) {
+             if (loggedinEmail.equalsIgnoreCase(resultSet2.getString("reciever_email"))) {
+            	 			count++;
+                 }   
+             } 
+             landlordEmails= new String[count][3];
+             int i=0;
+             while (results.next()){
+                 String renter_email = results.getString("sender_email");
+                 String message = results.getString("message");
+                 String subject = results.getString("subject");
+                 
+                 if(loggedinEmail.equalsIgnoreCase(results.getString("reciever_email"))){
+                     landlordEmails[i][0] = (renter_email);
+                     landlordEmails[i][1] = subject;
+                     landlordEmails[i][2] = message;
+                     i++;
+                 }
+             }
+             myStmt.close();
+         } catch (SQLException ex) {
+             ex.printStackTrace();
+         }
+         return landlordEmails;
+    }
+    public ArrayList<String> getRentersEmails(){
+        
+        ArrayList<String> renterEmails = new ArrayList<String>();
+        try {                    
+            Statement myStmt = dbConnect.createStatement();
+            results = myStmt.executeQuery("SELECT * FROM renter");
+            
+            while (results.next()){
+                
+                
+                String email = results.getString("email");
+                renterEmails.add(email);
+                
+            
+            }
+            myStmt.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return renterEmails;
     }
     public void close() {
         try {

@@ -6,13 +6,17 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Properties;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import controller.EditListingController;
 
 public class LandlordScreen implements Component{
 	public LandlordScreen() {
@@ -22,6 +26,7 @@ public class LandlordScreen implements Component{
 	@Override
 	public void draw() {
 		// TODO Auto-generated method stub
+		frame.setResizable(false);
 		frame.getContentPane().removeAll();
 		frame.getContentPane().revalidate();
 		frame.getContentPane().repaint();
@@ -46,8 +51,10 @@ public class LandlordScreen implements Component{
 		landlordTitle.setBounds(134, 0, 226, 41);
 		landlordTitle.setForeground(new Color(255, 255, 255));
 		panel.add(landlordTitle);
-		
+		EditListingController edit = new EditListingController();
+		String[] Properties = edit.getProperties();
 		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(Properties));
 		comboBox.setBackground(new Color(0, 191, 255));
 		comboBox.setMaximumRowCount(50);
 		comboBox.setBounds(37, 112, 168, 21);
@@ -82,11 +89,26 @@ public class LandlordScreen implements Component{
 		payFees.setForeground(new Color(255, 255, 255));
 		payFees.setFont(new Font("SansSerif", Font.BOLD, 16));
 		frame.getContentPane().add(payFees);
+		payFees.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				// String new_state = String.valueOf(stateOfListing.getSelectedItem());
+				int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to pay the fee of "+ edit.getFee(), "Close?",  JOptionPane.YES_NO_OPTION);
+				if(confirmation == JOptionPane.YES_OPTION){
+					int house_id = Integer.parseInt(String.valueOf(comboBox.getSelectedItem()));
+					if(edit.payFee(house_id)){
+						JOptionPane.showMessageDialog(frame, "Property is Now Active");
+					}else{
+						JOptionPane.showMessageDialog(frame, "Property Is Already Active");
+					}
+				}
+				
+			}
+		});
 		
 		JComboBox stateOfListing = new JComboBox();
 		stateOfListing.setBackground(new Color(0, 191, 255));
 		stateOfListing.setFont(new Font("SansSerif", Font.BOLD, 12));
-		stateOfListing.setModel(new DefaultComboBoxModel(new String[] {"Active", "Rented", "Cancelled", "Suspended"}));
+		stateOfListing.setModel(new DefaultComboBoxModel(new String[] {"RENTED", "CANCELLED", "SUSPENDED"}));
 		stateOfListing.setBounds(249, 195, 152, 27);
 		stateOfListing.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(stateOfListing);
@@ -97,7 +119,17 @@ public class LandlordScreen implements Component{
 		updateState.setBounds(254, 232, 147, 21);
 		updateState.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(updateState);
-		
+		updateState.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				String new_state = String.valueOf(stateOfListing.getSelectedItem());
+				int house_id = Integer.parseInt(String.valueOf(comboBox.getSelectedItem()));
+				if(edit.changeStatus(house_id, new_state)){
+					JOptionPane.showMessageDialog(frame, "Property Has been updated");
+				}else{
+					JOptionPane.showMessageDialog(frame, "Property Is Already in that State");
+				}
+			}
+		});
 		JButton LogoutButton = new JButton("Logout");
 		LogoutButton.setFont(new Font("SansSerif", Font.BOLD, 12));
 		LogoutButton.setBackground(new Color(255, 0, 0));
@@ -117,6 +149,7 @@ public class LandlordScreen implements Component{
 		frame.getContentPane().add(emails);
 		emails.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Component c = new EmailSystemScreen();
 			}
 		});
 		

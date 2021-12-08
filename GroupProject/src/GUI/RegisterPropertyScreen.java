@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -26,6 +27,7 @@ public class RegisterPropertyScreen implements Component{
 	@Override
 	public void draw() {
 		// TODO Auto-generated method stub
+		frame.setResizable(false);
 		frame.getContentPane().removeAll();
 		frame.getContentPane().revalidate();
 		frame.getContentPane().repaint();
@@ -45,7 +47,7 @@ public class RegisterPropertyScreen implements Component{
 		
 		JComboBox answer1 = new JComboBox();
 		answer1.setForeground(new Color(255, 255, 255));
-		answer1.setModel(new DefaultComboBoxModel(new String[] {"Apartment", "Townhouse", "Duplex", "Condo", "Studio", "Basement"}));
+		answer1.setModel(new DefaultComboBoxModel(new String[] {"APARTMENT", "TOWNHOUSE", "DUPLEX", "CONDO", "STUDIO", "BASEMENT"}));
 		answer1.setBackground(new Color(0, 191, 255));
 		answer1.setBounds(23, 88, 154, 21);
 		frame.getContentPane().add(answer1);
@@ -136,10 +138,24 @@ public class RegisterPropertyScreen implements Component{
 				String quandrantInput = String.valueOf(answer5.getSelectedItem());
 				PropertyPostingController posting = new PropertyPostingController("SUSPENDED", propertyTypeInput, numBedroomsInput, numBathroomsInput, furnished, quandrantInput,
 				address, DBMS.loggedinEmail);
+				JOptionPane.showMessageDialog(frame, "Property is Registered. To have it active please pay the fees for the property");
+				Component c = new LandlordScreen();
 			}
 		});
 		frame.getContentPane().add(finishRegistration);
 		
+		JButton back = new JButton("Go Back");
+		back.setBackground(new Color(0, 191, 255));
+		back.setForeground(new Color(255, 255, 255));
+		back.setFont(new Font("SansSerif", Font.BOLD, 12));
+		back.setBounds(286, 450, 161, 21);
+		back.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Component c = new LandlordScreen();
+			}
+		});
+		frame.getContentPane().add(back);
 		
 		frame.setVisible(true);
 	}

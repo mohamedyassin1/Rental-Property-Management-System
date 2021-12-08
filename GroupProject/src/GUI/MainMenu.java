@@ -16,6 +16,7 @@ public class MainMenu implements Component{
 	@Override
 	public void draw() {
 		//Frame setup
+		frame.setResizable(false);
 		frame.getContentPane().removeAll();
 		frame.getContentPane().revalidate();
 		frame.getContentPane().repaint();
@@ -103,8 +104,12 @@ public class MainMenu implements Component{
 		guestLogin.setBackground(new Color(0, 191, 255));
 		guestLogin.setBounds(327, 402, 150, 32);
 		frame.getContentPane().add(guestLogin);
-		
-		frame.setVisible(true);
+		guestLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Component c = new UnregisteredRenterScreen();
+			}
+		});
+	
 			
 			login.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
