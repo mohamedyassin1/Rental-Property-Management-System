@@ -110,12 +110,12 @@ public class MainMenu implements Component{
 				String passwordInput = String.valueOf(password.getPassword()).trim();
 				String emailInput = email.getText().trim();
 				String selectedType = String.valueOf(loginChooser.getSelectedItem());
-				if(nameInput.length() > 3 && passwordInput.length()>3 && emailInput.length()>3 && emailInput.contains("@") && nameInput.matches("[a-zA-Z]+")){
+				if(nameInput.length() >=3 && passwordInput.length()>=3 && emailInput.length()>=3 && emailInput.contains("@") && nameInput.matches("[a-zA-Z]+")){
 					AuthenticateController authenticate = new AuthenticateController(nameInput, emailInput, passwordInput, selectedType);
 					authenticate.register();
 					JOptionPane.showMessageDialog(frame, "you have successfully registered");
 				}else{
-					JOptionPane.showMessageDialog(frame, "Please make sure your input meeets the following reguirements\n1. All inputs have more than 3 characters\n2. Email should have the '@' character\n3. Name Only Contains Letters");
+					JOptionPane.showMessageDialog(frame, "Please make sure your input meeets the following reguirements\n1. All inputs have at least 3 characters\n2. Email should have the '@' character\n3. Name Only Contains Letters");
 				}
 			}
 		});
