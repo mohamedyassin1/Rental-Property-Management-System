@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`fees` (
   `amount` INT NOT NULL,
   `period` INT NOT NULL)
 ENGINE = InnoDB;
-INSERT INTO fees (amount, period) VALUES (0,0);
+INSERT INTO fees (amount, period) VALUES (20,30);
 
 -- -----------------------------------------------------
 -- Table `mydb`.`emails`
