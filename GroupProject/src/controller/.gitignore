@@ -2,3 +2,10 @@
 /PropertyPostingController.class
 /ViewSearchCriteria.class
 /EmailController.class
+<<<<<<< Updated upstream
+=======
+/NotificationController.class
+/ReportController.class
+/ManagerViewer.class
+/DBCViewController.class
+>>>>>>> Stashed changes
