@@ -91,18 +91,45 @@ public class ManagerScreen implements Component {
 		setFee.setBounds(20, 114, 130, 28);
 		frame.getContentPane().add(setFee);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setForeground(new Color(255, 255, 255));
-		comboBox.setBackground(new Color(0, 191, 255));
-		comboBox.setMaximumRowCount(50);
-		comboBox.setFont(new Font("SansSerif", Font.BOLD, 18));
-		comboBox.setBounds(20, 71, 139, 21);
-		frame.getContentPane().add(comboBox);
-		
 		JLabel propertySelect = new JLabel("Select Property");
 		propertySelect.setFont(new Font("SansSerif", Font.BOLD, 12));
 		propertySelect.setBounds(25, 48, 111, 13);
 		frame.getContentPane().add(propertySelect);
+		EditListingController edit = new EditListingController();
+		String[] Properties = edit.getAllProperties();
+		JComboBox propertiesComboBox = new JComboBox();
+		propertiesComboBox.setModel(new DefaultComboBoxModel(Properties));
+		propertiesComboBox.setBackground(new Color(0, 191, 255));
+		propertiesComboBox.setMaximumRowCount(50);
+		propertiesComboBox.setForeground(new Color(255, 255, 255));
+		propertiesComboBox.setBounds(20, 71, 139, 21);
+		frame.getContentPane().add(propertiesComboBox);
+
+		JComboBox stateOfListing = new JComboBox();
+		stateOfListing.setBackground(new Color(0, 191, 255));
+		stateOfListing.setFont(new Font("SansSerif", Font.BOLD, 12));
+		stateOfListing.setModel(new DefaultComboBoxModel(new String[] {"ACTIVE","RENTED", "CANCELLED", "SUSPENDED"}));
+		stateOfListing.setBounds(20, 100, 152, 27);
+		stateOfListing.setForeground(new Color(255, 255, 255));
+		frame.getContentPane().add(stateOfListing);
+
+		JButton updateState = new JButton("Update State");
+		updateState.setBackground(new Color(0, 191, 255));
+		updateState.setFont(new Font("SansSerif", Font.BOLD, 12));
+		updateState.setBounds(20, 140, 147, 21);
+		updateState.setForeground(new Color(255, 255, 255));
+		frame.getContentPane().add(updateState);
+		updateState.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				String new_state = String.valueOf(stateOfListing.getSelectedItem());
+				int house_id = Integer.parseInt(String.valueOf(propertiesComboBox.getSelectedItem()));
+				if(edit.changeStatus(house_id, new_state)){
+					JOptionPane.showMessageDialog(frame, "Property Has been updated");
+				}else{
+					JOptionPane.showMessageDialog(frame, "Property Is Already in that State");
+				}
+			}
+		});
 		
 		JButton generateSummary = new JButton("Periodical Summary Report");
 		generateSummary.setForeground(Color.WHITE);
