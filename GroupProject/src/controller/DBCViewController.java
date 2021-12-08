@@ -1,7 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
-
+import model.*;
 import GUI.MainMenu;
 
 public class DBCViewController {
