@@ -656,6 +656,25 @@ public class DBMS {
             ex.printStackTrace();
         }
     }
+    public String getLandlord(String email){
+        try {                    
+            Statement myStmt = dbConnect.createStatement();
+            results = myStmt.executeQuery("SELECT * FROM landlord");
+            
+            while (results.next()){
+                String landlordName = results.getString("name");
+                String landlordEmail = results.getString("email");
+                String landlordPassword = results.getString("password");
+                if (email.equals(landlordEmail)){
+                    return landlordName;
+                }
+            }
+            myStmt.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return "";
+    }
     public void close() {
         try {
             results.close();
