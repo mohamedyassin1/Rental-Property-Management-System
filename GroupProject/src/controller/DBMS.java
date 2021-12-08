@@ -16,6 +16,7 @@ public class DBMS {
     private ResultSet results;
     public static String loggedinEmail;
     public static String loggedinType;
+    public static int currFee = 0;
     public DBMS(String dBURL, String username, String password) {
         DBURL = dBURL;
         USERNAME = username;
