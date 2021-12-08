@@ -1,4 +1,4 @@
-\-- MySQL Workbench Forward Engineering
+-- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
@@ -104,10 +104,10 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`emails` (
   `email_Id` INT NOT NULL AUTO_INCREMENT,
-  `message` VARCHAR(250) NOT NULL,
-  `subject` VARCHAR(250) NOT NULL,
   `sender_email` VARCHAR(45) NOT NULL,
   `receiver_email` VARCHAR(45) NOT NULL,
+  `subject` VARCHAR(250) NOT NULL,
+  `message` VARCHAR(250) NOT NULL,
   PRIMARY KEY (`email_Id`))
 ENGINE = InnoDB;
 
