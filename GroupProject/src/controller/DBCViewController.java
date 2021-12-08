@@ -45,7 +45,7 @@ public class DBCViewController {
 				rentedIndex++;
 			}
 		}
-		Report = new Report(numberOfPropertiesRented,numberOfPropertiesListed,numberOfPropertiesActive, propertiesRented);
-		Report.generate();
+		Report report = new Report(numberOfPropertiesRented,numberOfPropertiesListed,numberOfPropertiesActive, propertiesRented);
+		report.generate();
 	}
 }

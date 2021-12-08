@@ -25,6 +25,8 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 
+import javax.swing.DefaultComboBoxModel;
+
 public class ManagerScreen implements Component {
 	public ManagerScreen() {
 		draw();
@@ -88,7 +90,7 @@ public class ManagerScreen implements Component {
 		});
 		setFee.setFont(new Font("SansSerif", Font.BOLD, 12));
 		setFee.setBackground(new Color(0, 191, 255));
-		setFee.setBounds(20, 114, 130, 28);
+		setFee.setBounds(20, 170, 130, 28);
 		frame.getContentPane().add(setFee);
 		
 		JLabel propertySelect = new JLabel("Select Property");

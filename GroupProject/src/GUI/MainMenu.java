@@ -103,6 +103,8 @@ public class MainMenu implements Component{
 		frame.getContentPane().add(register);
 		register.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dbUsernameInput = String.valueOf(sqlUsername.getText());
+				dbPasswordInput = String.valueOf(sqlPassword.getPassword());
 				String nameInput = name.getText().trim();
 				String passwordInput = String.valueOf(password.getPassword()).trim();
 				String emailInput = email.getText().trim();
@@ -110,7 +112,6 @@ public class MainMenu implements Component{
 				if(nameInput.length() > 3 && passwordInput.length()>3 && emailInput.length()>3 && emailInput.contains("@") && nameInput.matches("[a-zA-Z]+")){
 					AuthenticateController authenticate = AuthenticateController.getOnlyInstance();
 					authenticate.setUser(nameInput, emailInput, passwordInput, selectedType);
-					
 					authenticate.register();
 					JOptionPane.showMessageDialog(frame, "you have successfully registered");
 				}else{
@@ -133,7 +134,7 @@ public class MainMenu implements Component{
 		frame.getContentPane().add(guestLogin);
 		guestLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dbUsernameInput = sqlUsername.getText();
+				dbUsernameInput = String.valueOf(sqlUsername.getText());
 				dbPasswordInput = String.valueOf(sqlPassword.getPassword());
 				AuthenticateController authenticate = new AuthenticateController();
 				authenticate.setOnlyInstance(null);
@@ -156,8 +157,12 @@ public class MainMenu implements Component{
 						AuthenticateController authenticate = AuthenticateController.getOnlyInstance();
 						authenticate.setUser(nameInput, emailInput, passwordInput, selectedType);
 						try{
-							authenticate.login();
-							new LandlordScreen();
+							if(authenticate.login()){
+								new LandlordScreen();
+							}
+							else{
+								JOptionPane.showMessageDialog(frame, "Login failed, check inputs");	
+							}
 						}catch(UserNotFoundException u){
 							JOptionPane.showMessageDialog(frame, "Login failed, check inputs");
 						}
@@ -170,9 +175,13 @@ public class MainMenu implements Component{
 						String selectedType = String.valueOf(loginChooser.getSelectedItem());
 						AuthenticateController authenticate = AuthenticateController.getOnlyInstance();
 						authenticate.setUser(nameInput, emailInput, passwordInput, selectedType);
-						try{
-							authenticate.login();
-							new RegisteredRenterScreen();
+						try{							
+							if(authenticate.login()){
+								new RegisteredRenterScreen();
+							}
+							else{
+								JOptionPane.showMessageDialog(frame, "Login failed, check inputs");	
+							}
 						}catch(UserNotFoundException u){
 							JOptionPane.showMessageDialog(frame, "Login failed, check inputs");
 						}	
@@ -185,8 +194,12 @@ public class MainMenu implements Component{
 						AuthenticateController authenticate = AuthenticateController.getOnlyInstance();
 						authenticate.setUser(nameInput, emailInput, passwordInput, selectedType);
 						try{
-							authenticate.login();
-							new ManagerScreen();
+							if(authenticate.login()){
+								new ManagerScreen();
+							}
+							else{
+								JOptionPane.showMessageDialog(frame, "Login failed, check inputs");	
+							}
 						}catch(UserNotFoundException u){
 							JOptionPane.showMessageDialog(frame, "Login failed, check inputs");
 						}

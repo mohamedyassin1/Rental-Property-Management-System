@@ -185,14 +185,6 @@ public class UnregisteredRenterScreen implements Component{
 		Search.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(Search);
 		
-		JButton Unsubscribe = new JButton("Unsubscribe");
-		Unsubscribe.setFont(new Font("SansSerif", Font.BOLD, 10));
-		Unsubscribe.setBackground(new Color(0, 191, 255));
-		Unsubscribe.setBounds(359, 92, 117, 21);
-		Unsubscribe.setForeground(new Color(255, 255, 255));
-		frame.getContentPane().add(Unsubscribe);
-		
-		
 		JButton returnButton = new JButton("Main Menu");
 		returnButton.setFont(new Font("SansSerif", Font.BOLD, 10));
 		returnButton.setBackground(new Color(0, 191, 255));
