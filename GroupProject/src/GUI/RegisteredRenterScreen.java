@@ -192,6 +192,14 @@ public class RegisteredRenterScreen implements Component{
 		Unsubscribe.setBounds(359, 92, 117, 21);
 		Unsubscribe.setForeground(new Color(255, 255, 255));
 		frame.getContentPane().add(Unsubscribe);
+		NotificationController notification = new NotificationController();
+		Unsubscribe.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				notification.unsubscribe();
+				JOptionPane.showMessageDialog(null, "You Have Been Unsubscribed");
+				new MainMenu();
+			}
+		});
 		
 		JButton viewNotifications = new JButton("Notifications");
 		viewNotifications.setFont(new Font("SansSerif", Font.BOLD, 10));
