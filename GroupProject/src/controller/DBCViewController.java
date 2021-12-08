@@ -21,5 +21,31 @@ public class DBCViewController {
 	}
 	public void changeFees(int amount, int period){
         	db.updateFee(amount, period);
-    	}	
+    	}
+	public void createReport(){
+		int numberOfPropertiesActive = db.getActiveProperties().length;
+		String[][] allProperties = db.getPropertyInfo();
+		int numberOfPropertiesListed = allProperties.length;
+		int numberOfPropertiesRented = 0;
+		for(int i = 0;i<allProperties.length;i++){
+			if(allProperties[i][0].equalsIgnoreCase("Rented")){
+				numberOfPropertiesRented++;
+			}
+		}
+		String [][] propertiesRented = new String[numberOfPropertiesRented][3];
+		// System.out.println(numberOfPropertiesRented);
+		int rentedIndex = 0;
+		for(int i = 0;i<allProperties.length;i++){
+			System.out.println(allProperties[i].length);
+			if(allProperties[i][0].equalsIgnoreCase("Rented")){
+				System.out.println(propertiesRented.length);
+				propertiesRented[rentedIndex][0] = db.getLandlord(allProperties[i][8]); //landlord's name
+				propertiesRented[rentedIndex][1] = allProperties[i][7]; //id
+				propertiesRented[rentedIndex][2] = allProperties[i][6]; //address
+				rentedIndex++;
+			}
+		}
+		Report = new Report(numberOfPropertiesRented,numberOfPropertiesListed,numberOfPropertiesActive, propertiesRented);
+		Report.generate();
+	}
 }
