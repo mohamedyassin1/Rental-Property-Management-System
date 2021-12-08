@@ -42,7 +42,7 @@ public class EditListingController{
         return "$"+db.getFee();
     }
     public boolean changeStatus(int house_id, String Status){
-        if(Status.equalsIgnoreCase("ACTIVE"){
+        if(Status.equalsIgnoreCase("ACTIVE")){
             boolean to_return = db.changeStatusOfProperty(house_id, "ACTIVE");
             if(to_return == true){
                 db.addNotifications(house_id);
