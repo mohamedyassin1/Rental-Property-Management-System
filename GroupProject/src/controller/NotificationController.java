@@ -15,5 +15,7 @@ public class NotificationController {
         
         db.saveSearchCriteria(propertyType, numBedrooms, numBathrooms, furnished, quadrant);
     }
-    
+    public void unsubscribe(){
+        db.removeRenter();
+    }
 }
