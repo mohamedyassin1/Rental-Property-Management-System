@@ -334,7 +334,11 @@ public class DBMS {
             ResultSet resultSet2 = myStmt2.executeQuery("SELECT * FROM property");
             int count = 0;
             while (resultSet2.next()) {
-                if(resultSet2.getString("propertyStatus").equalsIgnoreCase("ACTIVE") && resultSet2.getString("furnished").equalsIgnoreCase(isFurnished)&&resultSet2.getString("propertyType").equalsIgnoreCase(propertyType) && resultSet2.getString("quadrant").equalsIgnoreCase(cityQuadrant)&&resultSet2.getInt("numBedrooms")==numBeds && resultSet2.getInt("numBathrooms")==numBaths){
+                if(resultSet2.getString("propertyStatus").equalsIgnoreCase("ACTIVE") && 
+                   resultSet2.getString("furnished").equalsIgnoreCase(isFurnished)&&
+                   resultSet2.getString("propertyType").equalsIgnoreCase(propertyType) && 
+                   resultSet2.getString("quadrant").equalsIgnoreCase(cityQuadrant)&&
+                   resultSet2.getInt("numBedrooms")==numBeds && resultSet2.getInt("numBathrooms")==numBaths){
                     count++;
                 }
               
@@ -351,7 +355,10 @@ public class DBMS {
                 String address = results.getString("address");
                
                 String quadrant = results.getString("quadrant");
-                if(status.equalsIgnoreCase("ACTIVE") && furnished.equalsIgnoreCase(isFurnished)&&type.equalsIgnoreCase(propertyType) && quadrant.equalsIgnoreCase(cityQuadrant)&&numBedrooms==numBeds && numBathrooms==numBaths){
+                if(status.equalsIgnoreCase("ACTIVE") && 
+                   furnished.equalsIgnoreCase(isFurnished)&&
+                   type.equalsIgnoreCase(propertyType) && 
+                   quadrant.equalsIgnoreCase(cityQuadrant)&&numBedrooms==numBeds && numBathrooms==numBaths){
                     activeProperties[i][0] = String.valueOf(id);
                     activeProperties[i][1] = type;
                     activeProperties[i][2] = String.valueOf(numBedrooms);
