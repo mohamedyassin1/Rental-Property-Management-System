@@ -110,6 +110,12 @@ public class ManagerScreen implements Component {
 		generateSummary.setBackground(new Color(0, 191, 255));
 		generateSummary.setBounds(232, 69, 194, 28);
 		frame.getContentPane().add(generateSummary);
+		generateSummary.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				viewer.createReport();
+				JOptionPane.showMessageDialog(null, "Report Has Been Generated. Please Check Your Parent Folder.");
+			}
+		});
 		
 		JButton renterInfo = new JButton("Renter Information");
 		renterInfo.addActionListener(new ActionListener() {
