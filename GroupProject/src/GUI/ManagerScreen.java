@@ -55,23 +55,34 @@ public class ManagerScreen implements Component {
 		managerTitle.setBounds(101, 0, 244, 38);
 		titlePanel.add(managerTitle);
 		
-		JButton setFee = new JButton("Set Fees");
+		DBCViewController viewer = new DBCViewController();
+		JButton setFee = new JButton("Change Fees");
 		setFee.setForeground(new Color(255, 255, 255));
 		setFee.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int confirmation =JOptionPane.showConfirmDialog(null, message, "ChangeFees", JOptionPane.OK_CANCEL_OPTION);
+				if(confirmation == JOptionPane.YES_OPTION){
+					int amount = -1, period = -1;
+					try{
+						amount = Integer.parseInt(String.valueOf(feeAmount.getText()));
+						period = Integer.parseInt(String.valueOf(feePeriod.getText()));
+					}catch (Exception ex){
+
+					}
+					if(amount<0 || period <0){
+						JOptionPane.showMessageDialog(null, "Invalid Input");
+					}else{
+						viewer.changeFees(amount, period);
+						JOptionPane.showMessageDialog(null, "Fees Have Been Changed");
+					}
+					
+				}
 			}
 		});
 		setFee.setFont(new Font("SansSerif", Font.BOLD, 12));
 		setFee.setBackground(new Color(0, 191, 255));
 		setFee.setBounds(20, 114, 130, 28);
 		frame.getContentPane().add(setFee);
-		
-		JButton changePeriod = new JButton("Change Fee Period");
-		changePeriod.setForeground(new Color(255, 255, 255));
-		changePeriod.setFont(new Font("SansSerif", Font.BOLD, 12));
-		changePeriod.setBackground(new Color(0, 191, 255));
-		changePeriod.setBounds(20, 152, 169, 28);
-		frame.getContentPane().add(changePeriod);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setForeground(new Color(255, 255, 255));
@@ -94,7 +105,6 @@ public class ManagerScreen implements Component {
 		frame.getContentPane().add(generateSummary);
 		
 		JButton renterInfo = new JButton("Renter Information");
-		DBCViewController viewer = new DBCViewController();
 		renterInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ArrayList<String> renterInfo = viewer.getRenterInfo();
