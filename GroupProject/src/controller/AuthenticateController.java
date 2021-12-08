@@ -3,16 +3,28 @@ package controller;
 import GUI.MainMenu;
 import java.util.ArrayList;
 import model.*;
-public class AuthenticateController {
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+public class AuthenticateController implements ActionListener {
     private ArrayList<String> storedNames = new ArrayList<String>();
     private ArrayList<String> storedEmails = new ArrayList<String>();
     private ArrayList<String> storedPasswords = new ArrayList<String>();
     private ArrayList<String> storedTypes = new ArrayList<String>();
-    private AuthenticateController instance;
+    private static AuthenticateController instance;
     private User user;
     private String userType; 
     private DBMS db;
-    public AuthenticateController(String name, String email, String password,String userType) {
+    
+    public static AuthenticateController getOnlyInstance() {
+        if(instance == null)
+            instance = new AuthenticateController();
+        return instance;
+    }
+    
+    public static void setOnlyInstance(AuthenticateController onlyInstance) {
+        AuthenticateController.instance = onlyInstance;
+    }
+    public void setUser(String name, String email, String password,String userType){
         this.userType = userType;
         if(userType.equalsIgnoreCase("renter")){
             user = new RegisteredRenter(email, name, password);
@@ -22,12 +34,11 @@ public class AuthenticateController {
             user = new Manager(email, name, password);
         }
         db = new DBMS("jdbc:mysql://localhost/mydb", MainMenu.dbUsernameInput, MainMenu.dbPasswordInput);
-        
     }
     public AuthenticateController() {
     	db = new DBMS("jdbc:mysql://localhost/mydb", MainMenu.dbUsernameInput, MainMenu.dbPasswordInput);
     }
-    public boolean login(){
+    public boolean login() throws UserNotFoundException{
         //get user
         if(userType.equalsIgnoreCase("renter")){
             return(db.getRenter(user.getName(), user.getEmail(), user.getPassword()));
@@ -36,8 +47,7 @@ public class AuthenticateController {
         }else if(userType.equalsIgnoreCase("manager")){
             return(db.getManager(user.getName(), user.getEmail(), user.getPassword()));
         }
-
-        return false;
+        throw new UserNotFoundException();
     }
     public boolean register(){
         //get user
@@ -65,5 +75,8 @@ public class AuthenticateController {
         }
 
         return false;
-    }   
+    } 
+    public void actionPerformed(ActionEvent e){  
+    
+    }
 }
