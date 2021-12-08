@@ -1,6 +1,6 @@
 
 package controller;
-
+import GUI.MainMenu;
 import java.util.ArrayList;
 import model.*;
 public class AuthenticateController {
@@ -21,7 +21,7 @@ public class AuthenticateController {
         }else if(userType.equalsIgnoreCase("manager")){
             user = new Manager(email, name, password);
         }
-        db = new DBMS("jdbc:mysql://localhost/mydb", "root", "hello12345");
+        db = new DBMS("jdbc:mysql://localhost/mydb", MainMenu.dbUsernameInput, MainMenu.dbPasswordInput);
         
     }
     

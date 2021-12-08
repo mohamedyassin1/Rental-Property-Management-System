@@ -1,6 +1,8 @@
 package controller;
 
 import java.util.ArrayList;
+
+import GUI.MainMenu;
 import model.*;
 import model.Property;
 public class PropertyPostingController{
@@ -10,7 +12,7 @@ public class PropertyPostingController{
 
     public PropertyPostingController(String propertyStatus, String propertyType, int numBedrooms, int numBathrooms, String furnished,
     String quadrant, String address, String loggedinEmail) {
-        db = new DBMS("jdbc:mysql://localhost/mydb", "root", "");
+    	db = new DBMS("jdbc:mysql://localhost/mydb", MainMenu.dbUsernameInput, MainMenu.dbPasswordInput);
         db.registerProperty(propertyStatus, propertyType, numBedrooms, numBathrooms,furnished,
         quadrant, address, loggedinEmail);
     }

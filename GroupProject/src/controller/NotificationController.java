@@ -1,9 +1,11 @@
 package controller;
 
+import GUI.MainMenu;
+
 public class NotificationController {
     DBMS db;
     public NotificationController(){
-        db = new DBMS("jdbc:mysql://localhost/mydb", "root", "koko2001");
+    	db = new DBMS("jdbc:mysql://localhost/mydb", MainMenu.dbUsernameInput, MainMenu.dbPasswordInput);
     }
     public String[][] getNotifications(){
        return db.getNotifications(); 

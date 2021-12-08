@@ -72,12 +72,20 @@ public class EmailSystemScreen implements Component{
 		Subject.setBounds(75, 61, 279, 21);
 		emailFrame.getContentPane().add(Subject);
 		
-		
+		if (controller.getUserType().equals("Renter")) {
 		JLabel RecipientLabel = new JLabel("PropertyID");
 		RecipientLabel.setToolTipText("PropertyID");
-		RecipientLabel.setFont(new Font("SansSerif", Font.BOLD, 12));
-		RecipientLabel.setBounds(10, 35, 45, 13);
+		RecipientLabel.setFont(new Font("SansSerif", Font.BOLD, 10));
+		RecipientLabel.setBounds(10, 35, 67, 13);
 		emailFrame.getContentPane().add(RecipientLabel);
+		}
+		else {
+			JLabel RecipientLabel = new JLabel("Renter Email");
+			RecipientLabel.setToolTipText("Renter Email");
+			RecipientLabel.setFont(new Font("SansSerif", Font.BOLD, 10));
+			RecipientLabel.setBounds(10, 35, 67, 13);
+			emailFrame.getContentPane().add(RecipientLabel);
+		}
 		
 		JLabel SubjectLabel = new JLabel("Subject");
 		SubjectLabel.setFont(new Font("SansSerif", Font.BOLD, 12));

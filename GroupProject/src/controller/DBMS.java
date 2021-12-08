@@ -406,7 +406,7 @@ public class DBMS {
     }
     public void sendEmail(String recipientEmail, String message, String subject) {
     	 try {
-             String query = "INSERT INTO emails (reciever_email, sender_email,subject, message) VALUES (?,?,?,?)";
+             String query = "INSERT INTO emails (receiver_email, sender_email,subject, message) VALUES (?,?,?,?)";
              PreparedStatement myStmt = dbConnect.prepareStatement(query);
              
              myStmt.setString(1, recipientEmail);
@@ -430,7 +430,7 @@ public class DBMS {
              ResultSet resultSet2 = myStmt2.executeQuery("SELECT * FROM emails");
              int count = 0;
              while (resultSet2.next()) {
-             if (loggedinEmail.equalsIgnoreCase(resultSet2.getString("reciever_email"))) {
+             if (loggedinEmail.equalsIgnoreCase(resultSet2.getString("receiver_email"))) {
             	 			count++;
                  }   
              } 
@@ -441,7 +441,7 @@ public class DBMS {
                  String message = results.getString("message");
                  String subject = results.getString("subject");
                  
-                 if(loggedinEmail.equalsIgnoreCase(results.getString("reciever_email"))){
+                 if(loggedinEmail.equalsIgnoreCase(results.getString("receiver_email"))){
                      landlordEmails[i][0] = (renter_email);
                      landlordEmails[i][1] = subject;
                      landlordEmails[i][2] = message;

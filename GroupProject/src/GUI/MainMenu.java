@@ -10,6 +10,8 @@ import GUI.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 public class MainMenu implements Component{
+	public static String dbUsernameInput;
+	public static String dbPasswordInput;
 	public MainMenu(){
 		draw();
 	}
@@ -38,6 +40,26 @@ public class MainMenu implements Component{
 		titleLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
 		titleLabel.setBounds(95, 10, 297, 49);
 		titlePanel.add(titleLabel);
+		
+		JLabel dbUsername = new JLabel("MySQL username\r\n");
+		dbUsername.setFont(new Font("SansSerif", Font.BOLD, 16));
+		dbUsername.setBounds(31, 71, 144, 21);
+		frame.getContentPane().add(dbUsername);
+		
+		JLabel dbPassword = new JLabel("MySQL password");
+		dbPassword.setFont(new Font("SansSerif", Font.BOLD, 16));
+		dbPassword.setBounds(258, 71, 170, 21);
+		frame.getContentPane().add(dbPassword);
+		
+		JTextField sqlUsername = new JTextField();
+		sqlUsername.setFont(new Font("SansSerif", Font.BOLD, 14));
+		sqlUsername.setColumns(10);
+		sqlUsername.setBounds(29, 98, 170, 21);
+		frame.getContentPane().add(sqlUsername);
+		
+		JPasswordField sqlPassword = new JPasswordField();
+		sqlPassword.setBounds(240, 98, 170, 21);
+		frame.getContentPane().add(sqlPassword);
 		
 		JLabel emailLabel = new JLabel("Email");
 		emailLabel.setFont(new Font("SansSerif", Font.BOLD, 16));
@@ -106,6 +128,8 @@ public class MainMenu implements Component{
 		frame.getContentPane().add(guestLogin);
 		guestLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dbUsernameInput = sqlUsername.getText();
+				dbPasswordInput = String.valueOf(sqlPassword.getPassword());
 				Component c = new UnregisteredRenterScreen();
 			}
 		});
@@ -114,6 +138,8 @@ public class MainMenu implements Component{
 			login.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					String selectedLogin = String.valueOf(loginChooser.getSelectedItem());
+					dbUsernameInput = sqlUsername.getText();
+					dbPasswordInput = String.valueOf(sqlPassword.getPassword());
 					if (selectedLogin == "Landlord")
 					{
 						String nameInput = name.getText();

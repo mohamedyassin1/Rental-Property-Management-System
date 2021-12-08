@@ -5,6 +5,7 @@ import model.Email;
 import java.util.ArrayList;
 
 import GUI.EmailSystemScreen;
+import GUI.MainMenu;
 
 public class EmailController {
     private EmailSystemScreen view;
@@ -12,7 +13,7 @@ public class EmailController {
     private DBMS db;
     
     public EmailController() {
-    	db = new DBMS("jdbc:mysql://localhost/mydb", "root", "");
+    	db = new DBMS("jdbc:mysql://localhost/mydb", MainMenu.dbUsernameInput, MainMenu.dbPasswordInput);
     }
     public String[] getProperties() {
     	String[][] temp =  db.getActiveProperties();

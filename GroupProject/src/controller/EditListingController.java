@@ -1,6 +1,8 @@
 package controller;
 
 import java.util.ArrayList;
+
+import GUI.MainMenu;
 import model.*;
 import model.Property;
 public class EditListingController{
@@ -9,7 +11,7 @@ public class EditListingController{
 
 
     public EditListingController() {
-        db = new DBMS("jdbc:mysql://localhost/mydb", "root", "hello12345");
+    	db = new DBMS("jdbc:mysql://localhost/mydb", MainMenu.dbUsernameInput, MainMenu.dbPasswordInput);
         // db.registerProperty(propertyStatus, propertyType, numBedrooms, numBathrooms,furnished,
         // quadrant, address, loggedinEmail);
     }
