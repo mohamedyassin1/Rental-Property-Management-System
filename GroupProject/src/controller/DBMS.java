@@ -625,6 +625,17 @@ public class DBMS {
                  return propertyInfo;
     }
     public void updateFee(int amount, int period){
+        try {                    
+            Statement myStmt = dbConnect.createStatement();
+            results = myStmt.executeQuery("SELECT * FROM fees");
+            
+            if (results.next()){
+                currFee = results.getInt("amount");
+            }
+            myStmt.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
         
         try{
             String query ="UPDATE fees SET amount = ?, period = ? WHERE amount = ?";
