@@ -19,6 +19,17 @@ public class EditListingController{
     public String[] getProperties() {
         return db.getPropertiesOfLandlord();
     }
+    public String[] getAllProperties() {
+        String[][] allPropertiesInfo = db.getPropertyInfo();
+        String[] propertyIds = new String [allPropertiesInfo.length];
+        for (int i = 0; i < allPropertiesInfo.length; i++) {
+            propertyIds[i] = allPropertiesInfo[i][7];
+        }
+        System.out.println(propertyIds.length);
+
+        
+        return propertyIds;
+    }
     public boolean payFee(int house_id){
         return db.changeStatusOfProperty(house_id, "ACTIVE");
     }
