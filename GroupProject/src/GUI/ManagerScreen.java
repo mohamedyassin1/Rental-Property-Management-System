@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 import controller.DBCViewController;
 
@@ -56,6 +57,12 @@ public class ManagerScreen implements Component {
 		titlePanel.add(managerTitle);
 		
 		DBCViewController viewer = new DBCViewController();
+		JTextField feeAmount = new JTextField();
+		JTextField feePeriod = new JTextField();
+		Object[] message = {
+			"Amount:", feeAmount,
+			"Period(in days):", feePeriod
+		};
 		JButton setFee = new JButton("Change Fees");
 		setFee.setForeground(new Color(255, 255, 255));
 		setFee.addActionListener(new ActionListener() {
