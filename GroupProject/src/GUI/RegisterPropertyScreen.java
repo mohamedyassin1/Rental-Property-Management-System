@@ -133,8 +133,8 @@ public class RegisterPropertyScreen implements Component{
 				int numBedroomsInput = Integer.valueOf(String.valueOf(answer2.getSelectedItem()));
 				int numBathroomsInput = Integer.valueOf(String.valueOf(answer3.getSelectedItem()));
 				String address = String.valueOf(answer6.getText());
-				boolean furnished = false;
-				if (answer4.isSelected()){ furnished = true;}
+				String furnished = "NO";
+				if (answer4.isSelected()){ furnished = "YES";}
 				String quandrantInput = String.valueOf(answer5.getSelectedItem());
 				PropertyPostingController posting = new PropertyPostingController("SUSPENDED", propertyTypeInput, numBedroomsInput, numBathroomsInput, furnished, quandrantInput,
 				address, DBMS.loggedinEmail);

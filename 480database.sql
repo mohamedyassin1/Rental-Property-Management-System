@@ -110,6 +110,21 @@ CREATE TABLE IF NOT EXISTS `mydb`.`emails` (
   `message` VARCHAR(250) NOT NULL,
   PRIMARY KEY (`email_Id`))
 ENGINE = InnoDB;
+CREATE TABLE IF NOT EXISTS `mydb`.`notifications` (
+  `id` INT NOT NULL auto_increment,
+  `renter_email` VARCHAR(45) NOT NULL,
+  `property_id` int NOT NULL,
+  `property_address` VARCHAR(250) NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_notifications_renter`
+    FOREIGN KEY (`renter_email`)
+    REFERENCES `mydb`.`search_criteria` (`renter_email`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

@@ -141,6 +141,20 @@ public class MainMenu implements Component{
 							JOptionPane.showMessageDialog(frame, "Login failed, check inputs");
 						}	
 					}
+					if (selectedLogin == "Manager") {
+						String nameInput = name.getText();
+						String passwordInput = String.valueOf(password.getPassword());
+						String emailInput = email.getText();
+						String selectedType = String.valueOf(loginChooser.getSelectedItem());
+						AuthenticateController authenticate = new AuthenticateController(nameInput, emailInput, passwordInput, selectedType);
+						if(authenticate.login()){
+							Component c = new ManagerScreen();
+						}
+						else{
+							JOptionPane.showMessageDialog(frame, "Login failed, check inputs");
+						}	
+					}
+
 				}
 			});
 			frame.setVisible(true);

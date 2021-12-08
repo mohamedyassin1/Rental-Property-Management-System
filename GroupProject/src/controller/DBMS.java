@@ -150,28 +150,84 @@ public class DBMS {
     }
 
 
-    public void registerProperty(String propertyStatus, String propertyType, int numBedrooms, int numBathrooms, boolean furnished,
+    public void registerProperty(String propertyStatus, String propertyType, int numBedrooms, int numBathrooms, String furnished,
     String quadrant, String address, String landlord_email){
         try{
-        String query = "INSERT INTO property (propertyStatus, propertyType, numBedrooms, numBathrooms,furnished,quadrant, address, landlord_email) VALUES (?,?,?,?,?,?,?,?)";
-        PreparedStatement myStmt = dbConnect.prepareStatement(query);
-        myStmt.setString(1, propertyStatus);
-        myStmt.setString(2, propertyType);
-        myStmt.setInt(3, numBedrooms);
-        myStmt.setInt(4, numBathrooms);
-        myStmt.setBoolean(5, furnished);
-        myStmt.setString(6, quadrant);
-        myStmt.setString(7, address);
-        myStmt.setString(8, landlord_email);
-        myStmt.executeUpdate();
-
-        myStmt.close();
-
+            String query = "INSERT INTO property (propertyStatus, propertyType, numBedrooms, numBathrooms,furnished,quadrant, address, landlord_email) VALUES (?,?,?,?,?,?,?,?)";
+            PreparedStatement myStmt = dbConnect.prepareStatement(query);
+            myStmt.setString(1, propertyStatus);
+            myStmt.setString(2, propertyType);
+            myStmt.setInt(3, numBedrooms);
+            myStmt.setInt(4, numBathrooms);
+            myStmt.setString(5, furnished);
+            myStmt.setString(6, quadrant);
+            myStmt.setString(7, address);
+            myStmt.setString(8, landlord_email);
+            myStmt.executeUpdate();
+            
+            myStmt.close();
+            
         }
         catch (SQLException ex) {
             ex.printStackTrace();
         }
 
+    }
+    public void addNotifications(int propertyId){
+        try {                    
+            Statement myStmt = dbConnect.createStatement();
+            results = myStmt.executeQuery("SELECT * FROM property");
+            
+            while (results.next()){
+                int id = results.getInt("houseIdNum");
+                String address = results.getString("address");
+                if(id == propertyId){
+                   
+                    try{
+                        Statement myStmtCriteria = dbConnect.createStatement();
+                        ResultSet resultsCriteria = myStmtCriteria.executeQuery("SELECT * FROM search_criteria");
+                        while (resultsCriteria.next()){
+                            String type = resultsCriteria.getString("propertyType");
+                            String cityQuadrant = resultsCriteria.getString("CityQuadrant");
+                            int numberBeds = resultsCriteria.getInt("numBedrooms");
+                            int numberBaths = resultsCriteria.getInt("numBathrooms");
+                            String houseFurnished = resultsCriteria.getString("furnished");
+                            String email = resultsCriteria.getString("renter_email");
+                           
+                            if (type.equalsIgnoreCase(results.getString("propertyType")) && 
+                                results.getInt("numBedrooms") == numberBeds && 
+                                results.getInt("numBathrooms") == numberBaths && 
+                                results.getString("furnished").equalsIgnoreCase(houseFurnished) &&
+                                cityQuadrant.equalsIgnoreCase(results.getString("quadrant"))){
+                                try{
+                                    String query = "INSERT INTO notifications (renter_email, property_id, property_address) VALUES (?,?,?)";
+                                    PreparedStatement myStmt_notification = dbConnect.prepareStatement(query);
+                                    myStmt_notification.setString(1, email);
+                                    myStmt_notification.setInt(2, propertyId);
+                                    myStmt_notification.setString(3, address);
+                                    
+                                    myStmt_notification.executeUpdate();
+            
+                                    myStmt_notification.close();
+                                }
+                                catch (SQLException ex) {
+                                    ex.printStackTrace();
+                                }
+                            }
+                        }
+                            myStmtCriteria.close();
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                    
+                    
+            }   
+            myStmt.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
     }
     public String[] getPropertiesOfLandlord(){
         ArrayList<String> properties = new ArrayList<String>();
@@ -418,6 +474,65 @@ public class DBMS {
             ex.printStackTrace();
         }
         return renterEmails;
+    }
+    public void saveSearchCriteria(String propertyType, int numBedrooms, int numBathrooms, String furnished,
+    String quadrant){
+        try{
+            String query = "INSERT INTO search_criteria (propertyType, numBedrooms, numBathrooms,furnished,cityQuadrant, renter_email) VALUES (?,?,?,?,?,?)";
+            PreparedStatement myStmt = dbConnect.prepareStatement(query);
+            myStmt.setString(1, propertyType);
+            myStmt.setInt(2, numBedrooms);
+            myStmt.setInt(3,numBathrooms);
+            myStmt.setString(4, furnished);
+            // myStmt.setBoolean(5, furnished);
+            myStmt.setString(5, quadrant);
+            // myStmt.setString(7, address);
+            myStmt.setString(6, loggedinEmail);
+            myStmt.executeUpdate();
+    
+            myStmt.close();
+    
+            }
+            catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+    }
+    public String[][] getNotifications(){
+        String[][] activeNotifications = new String[0][0];
+        // ArrayList[][] activeProperties = new ArrayList<String, String>();
+        try {                    
+            Statement myStmt = dbConnect.createStatement();
+            results = myStmt.executeQuery("SELECT * FROM notifications");
+            Statement myStmt2 = dbConnect.createStatement();
+            ResultSet resultSet2 = myStmt2.executeQuery("SELECT * FROM notifications");
+            int count = 0;
+            while (resultSet2.next()) {
+                if(resultSet2.getString("renter_email").equalsIgnoreCase(loggedinEmail)){
+                    count++;
+                }
+              
+            } 
+            activeNotifications= new String[count][2];
+            int i=0;
+            while (results.next()){
+                int id = results.getInt("property_id");
+                String renter_email = results.getString("renter_email");
+                
+                String address = results.getString("property_address");
+               
+               
+                if(renter_email.equalsIgnoreCase(loggedinEmail)){
+                    activeNotifications[i][0] = String.valueOf(id);
+                    activeNotifications[i][1] = address;
+                    i++;
+                }
+                
+            }
+            myStmt.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return activeNotifications;
     }
     public void close() {
         try {
