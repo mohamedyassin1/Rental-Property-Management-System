@@ -1,3 +1,13 @@
+/**
+ * Rental Property Management System Group 26
+ * @author Ahmed Waly
+ * @author Kai Wang
+ * @author Jaxson Waterstreet
+ * @author Dylan Windsor
+ * @author Mohamed Yassin
+ * @version     2.4
+ * @since       1.0
+ */
 package GUI;
 
 import java.awt.Color;
@@ -17,15 +27,24 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import controller.EditListingController;
-
+/**
+ * This class is the GUI for the Landlord Screen. It interacts with the Edit Listing Controller to edit listings.
+ * It also calls other screens' constructors such as the email screen and the register property screen for other features.
+ */
 public class LandlordScreen implements Component{
+	/**
+	 * Default constructor
+	 * Calls draw() method
+	 */
 	public LandlordScreen() {
 		draw();
 	}
-	
+	/**
+	 * The draw method that we override in every Screen. 
+	 * Draws our Landlord screen and every GUI component on it, some buttons implement ActionListener
+	 */
 	@Override
 	public void draw() {
-		// TODO Auto-generated method stub
 		frame.setTitle("Landlord");
 		frame.setResizable(false);
 		frame.getContentPane().removeAll();

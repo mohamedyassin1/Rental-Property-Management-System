@@ -46,12 +46,12 @@ public class EmailSystemScreen implements Component{
 		draw();
 	}
 	Dimension dim = Toolkit.getDefaultToolkit().getScreenSize(); //This gets the dimensions of the screen.
-	@SuppressWarnings("serial")
-	@Override
 	/**
 	 * The method used to draw our screen, all the GUI components are drawn inside. Some elements such as JButton implement ActionListener 
 	 * so that we can dynamically get user input for example, and then communicate that with the controllers, all that is inside this draw() method.
 	 */
+	@SuppressWarnings("serial")
+	@Override
 	public void draw() {
 		emailFrame = new JFrame("Email System");
 		emailFrame.setResizable(false);
@@ -229,7 +229,5 @@ public class EmailSystemScreen implements Component{
 		scrollPane.setViewportView(table);
 		//Making Frame visible so that users can actually see it
 		emailFrame.setVisible(true);
-		
-		
 	}
 }
