@@ -181,14 +181,18 @@ public class RegisterPropertyScreen implements Component{
 				String propertyTypeInput = String.valueOf(answer1.getSelectedItem());
 				int numBedroomsInput = Integer.valueOf(String.valueOf(answer2.getSelectedItem()));
 				int numBathroomsInput = Integer.valueOf(String.valueOf(answer3.getSelectedItem()));
-				String address = String.valueOf(answer6.getText());
+				String address = String.valueOf(answer6.getText()).trim();
 				String furnished = "NO";
 				if (answer4.isSelected()){ furnished = "YES";}
 				String quandrantInput = String.valueOf(answer5.getSelectedItem());
-				PropertyPostingController posting = new PropertyPostingController("SUSPENDED", propertyTypeInput, numBedroomsInput, numBathroomsInput, furnished, quandrantInput,
-				address, DBMS.loggedinEmail);
-				JOptionPane.showMessageDialog(frame, "Property is Registered. To have it active please pay the fees for the property");
-				Component c = new LandlordScreen();
+				if(address.length()>0){
+					PropertyPostingController posting = new PropertyPostingController("SUSPENDED", propertyTypeInput, numBedroomsInput, numBathroomsInput, furnished, quandrantInput,
+					address, DBMS.loggedinEmail);
+					JOptionPane.showMessageDialog(frame, "Property is Registered. To have it active please pay the fees for the property");
+					Component c = new LandlordScreen();
+				}else{
+					JOptionPane.showMessageDialog(frame, "Please input an Address");
+				}
 			}
 		});
 		frame.getContentPane().add(finishRegistration);
