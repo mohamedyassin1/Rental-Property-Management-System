@@ -7,7 +7,6 @@ import GUI.MainMenu;
 public class NotificationController implements NotificationsSubject{
     DBMS db;
     private Observer observer;
-    ArrayList<String> renterEmails = new ArrayList<String>(db.getRentersEmails());
     
     public NotificationController(){
     	db = new DBMS("jdbc:mysql://localhost/mydb", MainMenu.dbUsernameInput, MainMenu.dbPasswordInput);
