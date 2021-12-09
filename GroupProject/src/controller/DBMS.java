@@ -86,8 +86,9 @@ public class DBMS {
     /**
      * Registers the renter, requires name, email and password
      * updates database with the renter information
+     * @return If the Renter was successfully registered(true) or not(false)
      */
-    public void registerRenter(String name, String email, String password){
+    public boolean registerRenter(String name, String email, String password){
         try {
             String query = "INSERT INTO renter (email, name, password) VALUES (?,?,?)";
             PreparedStatement myStmt = dbConnect.prepareStatement(query);
@@ -97,15 +98,17 @@ public class DBMS {
             myStmt.setString(3, password);
             myStmt.executeUpdate();   
             myStmt.close();
+            return true;
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        return false;
     }
 
     /**
      * Getter function used to see if manager exists
-     * @return boolean if the renter exists(true), if not(false)
+     * @return boolean if the manager exists(true), if not(false)
      */
     public boolean getManager(String name, String email, String password){
         try {                    
@@ -132,8 +135,9 @@ public class DBMS {
     /**
      * Registers the manager, requires name, email and password
      * updates database with the manager information
+     * @return If the Manager was successfully registered(true) or not(false)
      */
-    public void registerManager(String name, String email, String password){
+    public boolean registerManager(String name, String email, String password){
         try {
                 
             String query = "INSERT INTO manager (email, name, password) VALUES (?,?,?)";
@@ -144,12 +148,14 @@ public class DBMS {
             myStmt.setString(3, password);
             myStmt.executeUpdate();
         // System.out.println("Rows affected: " + rowCount);
+            return true;
             
             myStmt.close();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        return false;
     }
 
     /**
@@ -181,8 +187,9 @@ public class DBMS {
     /**
      * Registers the landlord, requires name, email and password
      * updates database with the landlord information
+     * @return If the Landlord was successfully registered(true) or not(false)
      */
-    public void registerLandlord(String name, String email, String password){
+    public boolean registerLandlord(String name, String email, String password){
         try {
                 
             String query = "INSERT INTO landlord (email, name, password) VALUES (?,?,?)";
@@ -195,10 +202,12 @@ public class DBMS {
         // System.out.println("Rows affected: " + rowCount);
             
             myStmt.close();
+            return true;
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        return false;
     }
 
     /**
