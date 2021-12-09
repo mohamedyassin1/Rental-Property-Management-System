@@ -164,8 +164,11 @@ public class MainMenu implements Component{
 				if(nameInput.length() > 3 && passwordInput.length()>3 && emailInput.length()>3 && emailInput.contains("@") && nameInput.matches("[a-zA-Z]+")){
 					AuthenticateController authenticate = AuthenticateController.getOnlyInstance();
 					authenticate.setUser(nameInput, emailInput, passwordInput, selectedType);
-					authenticate.register();
-					JOptionPane.showMessageDialog(frame, "you have successfully registered");
+					if(authenticate.register()){
+						JOptionPane.showMessageDialog(frame, "you have successfully registered");
+					}else{
+						JOptionPane.showMessageDialog(frame, "Email is already being used please use a different email");	
+					}
 				}else{
 					JOptionPane.showMessageDialog(frame, "Please make sure your input meeets the following reguirements\n1. All inputs have more than 3 characters\n2. Email should have the '@' character\n3. Name Only Contains Letters");
 				}
