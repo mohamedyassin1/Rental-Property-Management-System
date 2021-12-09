@@ -1,31 +1,54 @@
+/**
+ * Rental Property Management System Group 26
+ * @author Ahmed Waly
+ * @author Kai Wang
+ * @author Jaxson Waterstreet
+ * @author Dylan Windsor
+ * @author Mohamed Yassin
+ * @version     1.7
+ * @since       1.0
+ */
+
 package controller;
 
 import java.sql.*;
 import java.util.ArrayList;
 
 public class DBMS {
-    /**Represents the database URL */
     public final String DBURL;
-    /**Represents the database email */
     public final String USERNAME;
-    /**Represents the database Password */
     public final String PASSWORD;
-    /**Connection object that will be used to connect to the database */
     private Connection dbConnect;
-    /**ResultSet Object that will be used to execute SQL commands */
-    private ResultSet results;
-    public static String loggedinEmail;
-    public static String loggedinType;
-    public static int currFee = 0;
+    private ResultSet results; 
+    public static String loggedinEmail; 
+    public static String loggedinType; 
+    public static int currFee = 0; 
+     /**
+     * This constructor initializes the property information
+     * @param DBURL Represents the database URL
+     * @param USERNAME Represents the database email
+     * @param PASSWORD Represents the database password
+     * @param dbConnect Connection object that will be used to connect to the database
+     * @param results ResultSet Object that will be used to execute SQL commands
+     * @param loggedinEmail private variable to store current logged in user email
+     * @param loggedinType Stores the type of access, i.e. manager/landlord/renter
+     * @param currFee Stores fee
+     */
+     
+    /**
+     * Constructor used to store database connection information, URL
+     */
     public DBMS(String dBURL, String username, String password) {
         DBURL = dBURL;
         USERNAME = username;
         PASSWORD = password;
         initializeConnection();
     }   
-    
+    /**
+     * Initialize connection with MySQL database
+     * @returns message "connected" if successful
+     */
     public void initializeConnection(){
-                
         try{
             dbConnect = DriverManager.getConnection(DBURL, USERNAME, PASSWORD);
             System.out.println("connected!");
@@ -33,15 +56,20 @@ public class DBMS {
             e.printStackTrace();
         }
     }
+     /**
+     * Getter function used to check if renter exists
+     * @return boolean if the renter exists(true), if not(false)
+     */
     public boolean getRenter(String name, String email, String password){
         try {                    
             Statement myStmt = dbConnect.createStatement();
             results = myStmt.executeQuery("SELECT * FROM renter");
-            
+            //Checks that the renter information exists
             while (results.next()){
                 String renterName = results.getString("name");
                 String renterEmail = results.getString("email");
                 String renterPassword = results.getString("password");
+                //If renter does exist, return true
                 if (name.equals(renterName) && email.equals(renterEmail) && password.equals(renterPassword)){
                     loggedinEmail = renterEmail;
                     loggedinType = "Renter";
@@ -54,6 +82,12 @@ public class DBMS {
         }
         return false;
     }
+
+
+    /**
+     * Registers the renter, requires name, email and password
+     * updates database with the renter information
+     */
     public void registerRenter(String name, String email, String password){
         try {
             String query = "INSERT INTO renter (email, name, password) VALUES (?,?,?)";
@@ -62,15 +96,18 @@ public class DBMS {
             myStmt.setString(1, email);
             myStmt.setString(2, name);
             myStmt.setString(3, password);
-            myStmt.executeUpdate();
-        // System.out.println("Rows affected: " + rowCount);
-            
+            myStmt.executeUpdate();   
             myStmt.close();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
+
+    /**
+     * Getter function used to see if manager exists
+     * @return boolean if the renter exists(true), if not(false)
+     */
     public boolean getManager(String name, String email, String password){
         try {                    
             Statement myStmt = dbConnect.createStatement();
@@ -92,6 +129,11 @@ public class DBMS {
         }
         return false;
     }
+
+    /**
+     * Registers the manager, requires name, email and password
+     * updates database with the manager information
+     */
     public void registerManager(String name, String email, String password){
         try {
                 
@@ -110,6 +152,11 @@ public class DBMS {
             ex.printStackTrace();
         }
     }
+
+    /**
+     * Getter function used to see if landlord exists
+     * @return boolean if the renter exists(true), if not(false)
+     */
     public boolean getLandlord(String name, String email, String password){
         try {                    
             Statement myStmt = dbConnect.createStatement();
@@ -131,6 +178,11 @@ public class DBMS {
         }
         return false;
     }
+
+    /**
+     * Registers the landlord, requires name, email and password
+     * updates database with the landlord information
+     */
     public void registerLandlord(String name, String email, String password){
         try {
                 
@@ -150,7 +202,18 @@ public class DBMS {
         }
     }
 
-
+    /**
+     * Registers the property, requires the following parameters
+     * @param propertyStatus status of the property i.e. SUSPENDED
+     * @param propertyType type of property i.e. APARTMENT
+     * @param numBedrooms number of bedrooms i.e. 3
+     * @param numBathrooms number of bathrooms i.e. 4
+     * @param furnished is the house furnished, checked/unchecked
+     * @param quadrant quadrant where the house is located i.e. SW
+     * @param address address of the house
+     * @param landlord_email email of the landlord who owns the house
+     * updates database with the property information
+     */
     public void registerProperty(String propertyStatus, String propertyType, int numBedrooms, int numBathrooms, String furnished,
     String quadrant, String address, String landlord_email){
         try{
@@ -174,6 +237,11 @@ public class DBMS {
         }
 
     }
+
+    /**
+     * function used to add a notification when a property is updated
+     * updated the notification table in the database which is later used to notify renter
+     */
     public void addNotifications(int propertyId){
         try {                    
             Statement myStmt = dbConnect.createStatement();
@@ -230,6 +298,11 @@ public class DBMS {
         }
         
     }
+
+    /**
+     * Getter function used to see all the properties that a selected landlord owns 
+     * @return String[] which contains the house ID numbers
+     */
     public String[] getPropertiesOfLandlord(){
         ArrayList<String> properties = new ArrayList<String>();
         try {                    
@@ -252,6 +325,12 @@ public class DBMS {
         properties.toArray(properties_to_return);
         return properties_to_return;
     }
+    /**
+     * function used to change property status, requires
+     * @param property_id the house id_number of the property
+     * @param newStatus most updated status of the property
+     * @return boolean if the update is successful(true), failed(false)
+     */
     public boolean changeStatusOfProperty(int property_id, String newStatus){
         try {                    
             Statement myStmt = dbConnect.createStatement();
@@ -279,6 +358,10 @@ public class DBMS {
         }
         return false;
     }
+    /**
+     * Getter function used to see all the active properties
+     * @return String[][] which contains the house ID numbers and the parameters which describe the property
+     */
     public String[][] getActiveProperties(){
         String[][] activeProperties = new String[0][0];
         // ArrayList[][] activeProperties = new ArrayList<String, String>();
@@ -325,6 +408,10 @@ public class DBMS {
         }
         return activeProperties;
     }
+     /**
+     * Getter function used to see all the active properties within the specified criteria
+     * @return String[][] which contains the house ID numbers and the parameters which describe the property
+     */
     public String[][] getCriteriaProperties(String propertyType, int numBeds, int numBaths, String isFurnished, String cityQuadrant){
         String[][] activeProperties = new String[0][0];
         // ArrayList[][] activeProperties = new ArrayList<String, String>();
@@ -378,6 +465,10 @@ public class DBMS {
         }
         return activeProperties;
     }
+     /**
+     * Getter function used to see the fees 
+     * @return String which contains the fee amount
+     */
     public String getFee(){
         try {                    
             Statement myStmt = dbConnect.createStatement();
@@ -394,6 +485,10 @@ public class DBMS {
         }
         return "Free";
     }
+     /**
+     * Getter function used to see the landlord email
+     * @return landlord email as a string
+     */
     public String getLandlordEmail(int PropertyID) {
     	try {                    
     	    Statement myStmt = dbConnect.createStatement();
@@ -412,6 +507,13 @@ public class DBMS {
     	}
     	return " ";
     }
+     /**
+     * function used to send email between users, requires 
+     * @param recipientEmail the user email who will receive the message
+     * @param message the message itself, can contain up to 250 characters
+     * @param subject the subject of the email, up to 250 characters
+     * updates emails table in the database
+     */
     public void sendEmail(String recipientEmail, String message, String subject) {
     	 try {
              String query = "INSERT INTO emails (receiver_email, sender_email,subject, message) VALUES (?,?,?,?)";
@@ -428,6 +530,10 @@ public class DBMS {
              ex.printStackTrace();
          }
     }
+    /**
+     * Getter function used retrieve email
+     * @return string[][] which contains renter_email, subject and message
+     */
     public String[][] getEmails(){
     	 String[][] landlordEmails = new String[0][0];
          // ArrayList[][] activeProperties = new ArrayList<String, String>();
@@ -462,6 +568,10 @@ public class DBMS {
          }
          return landlordEmails;
     }
+    /**
+     * Getter function used retrieve emails from all renters
+     * @return ArrayList<String> of emails
+     */
     public ArrayList<String> getRentersEmails(){
         
         ArrayList<String> renterEmails = new ArrayList<String>();
@@ -483,6 +593,15 @@ public class DBMS {
         }
         return renterEmails;
     }
+     /**
+     * function used to save search criteria, requires
+     * @param propertyType type of property i.e. APARTMENT
+     * @param numBedrooms number of bedrooms i.e. 3
+     * @param numBathrooms number of bathrooms i.e. 4
+     * @param furnished is the house furnished, checked/unchecked
+     * @param quadrant quadrant where the house is located i.e. SW
+     * updates search_criteria in the database
+     */
     public void saveSearchCriteria(String propertyType, int numBedrooms, int numBathrooms, String furnished,
     String quadrant){
         try{
@@ -505,6 +624,10 @@ public class DBMS {
                 ex.printStackTrace();
             }
     }
+    /**
+     * Getter function used retrieve notifications
+     * @return string[][] which contains property id, property address
+     */
     public String[][] getNotifications(){
         String[][] activeNotifications = new String[0][0];
         // ArrayList[][] activeProperties = new ArrayList<String, String>();
@@ -542,6 +665,10 @@ public class DBMS {
         }
         return activeNotifications;
     }
+    /**
+     * Getter function used retrieve renter information
+     * @return arrayList<String> which contains renter email and name
+     */
     public ArrayList<String> getRenterInfo() {
     	ArrayList<String> listOfRenters = new ArrayList<String>();
     	  try {                    
@@ -557,6 +684,10 @@ public class DBMS {
           }
               return listOfRenters;
     }
+    /**
+     * Getter function used retrieve landlord information
+     * @return arrayList<String> which contains renter email and name and property ID
+     */
     public ArrayList<String> getLandlordInfo(){
     	ArrayList<String> landlordEmails = new ArrayList<String>();
     	ArrayList<String> landlordInfo = new ArrayList<String>();
@@ -582,6 +713,11 @@ public class DBMS {
          }
              return landlordInfo;
     }
+     /**
+     * Getter function used to retrieve property information
+     * @return string[][] which contains property status, property type, number of bedrooms, 
+     * number of bathrooms, furnishing status, quadrant, address, house ID and landlord email
+     */
     public String[][] getPropertyInfo(){
     	String[][] propertyInfo = new String[0][0];
     	 try {                    
@@ -624,6 +760,12 @@ public class DBMS {
              }
                  return propertyInfo;
     }
+     /**
+     * function used to update fee, requires
+     * @param amount dollar amount of fee paid
+     * @param period time between payments
+     * updates the fees table in the database
+     */
     public void updateFee(int amount, int period){
         try {                    
             Statement myStmt = dbConnect.createStatement();
@@ -651,6 +793,11 @@ public class DBMS {
         }
         
     }
+    /**
+     * function used to remove a specific renter
+     * deletes the selected renter in the database
+     * updates the renter table in the database
+     */
     public void removeRenter(){
         try {
             String query = "DELETE FROM renter WHERE email = ?";
