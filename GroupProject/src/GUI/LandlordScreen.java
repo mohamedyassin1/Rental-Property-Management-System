@@ -112,7 +112,7 @@ public class LandlordScreen implements Component{
 		frame.getContentPane().add(RegisterFormLabel);
 		/*
 		 * Button to register a new property.
-		 * Implements action listener so that it responds to user input and then opens a new screen, Register Property Screen so that
+		 * Has an action listener so that it responds to user input and then opens a new screen, Register Property Screen so that
 		 * you can register properties.
 		 */
 		JButton RegisterFormButton = new JButton("Register a New Property");
