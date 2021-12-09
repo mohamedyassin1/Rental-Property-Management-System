@@ -1,3 +1,13 @@
+/**
+ * Rental Property Management System Group 26
+ * @author Ahmed Waly
+ * @author Kai Wang
+ * @author Jaxson Waterstreet
+ * @author Dylan Windsor
+ * @author Mohamed Yassin
+ * @version     1.2
+ * @since       1.0
+ */
 package controller;
 
 import java.util.ArrayList;
@@ -6,10 +16,16 @@ import GUI.MainMenu;
 
 public class DBCViewController {
 	private DBMS db;
-
+	/**
+	 * Default consrtuctor establishes database connection
+	 */
 	public DBCViewController() {
     	db = new DBMS("jdbc:mysql://localhost/mydb", MainMenu.dbUsernameInput, MainMenu.dbPasswordInput);
     }
+	/**
+	 * 
+	 * @return 
+	 */
 	public ArrayList<String> getRenterInfo(){
 		return db.getRenterInfo();
 	}
@@ -33,7 +49,6 @@ public class DBCViewController {
 			}
 		}
 		String [][] propertiesRented = new String[numberOfPropertiesRented][3];
-		// System.out.println(numberOfPropertiesRented);
 		int rentedIndex = 0;
 		for(int i = 0;i<allProperties.length;i++){
 			System.out.println(allProperties[i].length);
