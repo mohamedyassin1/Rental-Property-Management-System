@@ -24,11 +24,16 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import controller.EmailController;
-
+/**
+ * This class is the GUI for the Email System. It interacts with the Email Controller to send user input and change the database.
+ * It used by the Registered Renters and Landlords to communicate.
+ */
 public class EmailSystemScreen implements Component{
-	private JFrame emailFrame;
-	
-	public EmailSystemScreen(){
+	private JFrame emailFrame; //the frame used to draw on.
+	/**
+	 * Default Constructor for EmailSystemScreen 
+	 */
+	public EmailSystemScreen(){ 
 		draw();
 	}
 	Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
