@@ -4,3 +4,8 @@
 /EmailController.class
 /NotificationController.class
 /DBCViewController.class
+/UserNotFoundException.class
+/NotificationsSubject.class
+/Observer.class
+/NotificationSubject.class
+/RegisteredRenterListener.class

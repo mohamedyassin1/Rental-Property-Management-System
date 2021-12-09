@@ -1,9 +1,14 @@
 package controller;
 
+import java.util.ArrayList;
+
 import GUI.MainMenu;
 
-public class NotificationController {
+public class NotificationController implements NotificationsSubject{
     DBMS db;
+    private Observer observer;
+    ArrayList<String> renterEmails = new ArrayList<String>(db.getRentersEmails());
+    
     public NotificationController(){
     	db = new DBMS("jdbc:mysql://localhost/mydb", MainMenu.dbUsernameInput, MainMenu.dbPasswordInput);
     }
@@ -12,10 +17,12 @@ public class NotificationController {
     }
     public void saveCriteria(String propertyType, int numBedrooms, int numBathrooms, String furnished,
     String quadrant){
-        
         db.saveSearchCriteria(propertyType, numBedrooms, numBathrooms, furnished, quadrant);
     }
     public void unsubscribe(){
         db.removeRenter();
     }
+	public void notifyAllObservers() {
+		observer.update();
+	}
 }

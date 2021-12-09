@@ -28,7 +28,6 @@ import controller.NotificationController;
 
 public class NotificationScreen implements Component{
 	private JFrame notificationFrame;
-	
 	public NotificationScreen(){
 		draw();
 	}

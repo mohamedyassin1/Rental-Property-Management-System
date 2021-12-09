@@ -227,9 +227,7 @@ public class DBMS {
             myStmt.setString(7, address);
             myStmt.setString(8, landlord_email);
             myStmt.executeUpdate();
-            
             myStmt.close();
-            
         }
         catch (SQLException ex) {
             ex.printStackTrace();
@@ -640,7 +638,6 @@ public class DBMS {
                 if(resultSet2.getString("renter_email").equalsIgnoreCase(loggedinEmail)){
                     count++;
                 }
-              
             } 
             activeNotifications= new String[count][2];
             int i=0;
