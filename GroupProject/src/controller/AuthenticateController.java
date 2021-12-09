@@ -90,26 +90,26 @@ public class AuthenticateController implements ActionListener {
     public boolean register(){
         //get user
         if(userType.equalsIgnoreCase("renter")){
-            db.registerRenter(user.getName(), user.getEmail(), user.getPassword());
+            
             storedNames.add(user.getName());
             storedEmails.add(user.getEmail());
             storedPasswords.add(user.getPassword());
             storedTypes.add("renter");
-            return true;
+            return db.registerRenter(user.getName(), user.getEmail(), user.getPassword());
         }else if(userType.equalsIgnoreCase("landlord")){
-            db.registerLandlord(user.getName(), user.getEmail(), user.getPassword());
+            
             storedNames.add(user.getName());
             storedEmails.add(user.getEmail());
             storedPasswords.add(user.getPassword());
             storedTypes.add("landlord");
-            return true;
+            return db.registerLandlord(user.getName(), user.getEmail(), user.getPassword());
         }else if(userType.equalsIgnoreCase("manager")){
-            db.registerManager(user.getName(), user.getEmail(), user.getPassword());
+            
             storedNames.add(user.getName());
             storedEmails.add(user.getEmail());
             storedPasswords.add(user.getPassword());
             storedTypes.add("manager");
-            return true;
+            return db.registerManager(user.getName(), user.getEmail(), user.getPassword());
         }
 
         return false;
