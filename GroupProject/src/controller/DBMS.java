@@ -24,7 +24,6 @@ public class DBMS {
     public static String loggedinType; 
     public static int currFee = 0; 
      /**
-     * This constructor initializes the property information
      * @param DBURL Represents the database URL
      * @param USERNAME Represents the database email
      * @param PASSWORD Represents the database password
