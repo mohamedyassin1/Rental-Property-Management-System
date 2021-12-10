@@ -31,3 +31,8 @@ Steps to Compile and Run the Application:
 
 ![image](https://user-images.githubusercontent.com/73013959/145514039-00b68727-94c6-41fb-a21d-0048a095db05.png)
 
+## Unregistered Renter (Guest) Screen
+![image](https://user-images.githubusercontent.com/67707288/145514385-9d89e2e0-debb-4e13-8fd2-dafefe815db8.png)
+
+## Manager Screen
+![image](https://user-images.githubusercontent.com/67707288/145514491-b47f1e8d-617e-41ba-944b-773d55b57824.png)
