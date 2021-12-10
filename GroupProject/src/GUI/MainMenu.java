@@ -275,4 +275,10 @@ public class MainMenu implements Component{
 			});
 			frame.setVisible(true); //making frame actually visible
 		}
+	public static void main(String[] args) {
+        
+		EventQueue.invokeLater(() -> {
+				new MainMenu().draw();        
+		});
+	}
 }
