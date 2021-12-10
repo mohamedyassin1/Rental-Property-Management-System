@@ -23,6 +23,9 @@ Steps to Compile and Run the Application:
 
 ![image](https://user-images.githubusercontent.com/73013959/145513919-0062375b-dcca-4802-972f-a5d0be899bb8.png)
 
+## Landlord Screen:
+![image](https://user-images.githubusercontent.com/67707288/145515253-bb32773d-a0f9-439c-87a3-5642bf3361f6.png)
+
 ## Email System:
 
 ![image](https://user-images.githubusercontent.com/73013959/145513939-c49b4bce-4e34-42ad-874e-03ecb87dd385.png)
