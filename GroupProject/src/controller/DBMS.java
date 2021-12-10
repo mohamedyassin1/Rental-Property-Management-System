@@ -147,10 +147,11 @@ public class DBMS {
             myStmt.setString(2, name);
             myStmt.setString(3, password);
             myStmt.executeUpdate();
+            myStmt.close();
         // System.out.println("Rows affected: " + rowCount);
             return true;
             
-            myStmt.close();
+           
 
         } catch (SQLException ex) {
             ex.printStackTrace();

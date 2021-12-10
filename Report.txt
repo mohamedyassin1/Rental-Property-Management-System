@@ -1,8 +1,8 @@
 Manager Report:
 
 Houses Rented: 2
-Houses Listed: 20
-Houses Active: 11
+Houses Listed: 21
+Houses Active: 12
 Houses Rented:
 
 0.  Landlord's Name: moussavi   Property Id: 3  Property address: 
