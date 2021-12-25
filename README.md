@@ -1,5 +1,15 @@
 # Rental-Property-Management-System
-Steps to Compile and Run the Application:
+## Authors
+* Ahmed Waly
+* Kai Wang
+* Jaxson Waterstreet
+* Dylan Windsor
+* Mohamed Yassin
+
+## Purpose & How We Built It
+The purpose of this application is to create a platform that landlords, property managers and renters can simultaneously use to manage their real estate needs. It is important for us that the users have a simple, yet intuitive interface to use, and so we built a consistent, easy-to-use GUI using Swing and applied error checking and hints wherever needed. As well, most data is stored and manipulated using Java and MySQL so that we can easily link tables of data between various stages of the application. Lastly, we used this application as an opportunity to apply design principles and patterns to build a modular and well-documented application that can be improved at any time, some prominent examples are Class, Sequence and Transition diagrams in the design phase, as well as the Singleton design pattern and Model-View-Controller pattern in the implementation phase.
+
+## Steps to Compile and Run the Application:
   1. Clone The Repository on your local device.
   2. If your local device already has a mysql table that is named "mydb", drop it.
   3. Source the sql file on the MySQL Command Line(make sure to include your full path in the command)
@@ -7,15 +17,6 @@ Steps to Compile and Run the Application:
   5. Navigate to the src folder in your compiler
   6. To Compile Run The following command line in your compiler ```javac -cp .;../lib/mysql-connector-java-8.0.23.jar;.GUI/*.java controller/*.java model/*.java```
   7. To Run, ```java -cp .;../lib/mysql-connector-java-8.0.23.jar;. GUI/MainGUIClass```
-## Authors
-* Ahmed Waly
-* Kai Wang
-* Jaxson Waterstreet
-* Dylan Windsor
-* Mohamed Yassin
-## Purpose & How We Built It
-The purpose of this application is to create a platform that landlords, property managers and renters can simultaneously use to manage their real estate needs. It is important for us that the users have a simple, yet intuitive interface to use, and so we built a consistent, easy-to-use GUI using Swing and applied error checking and hints wherever needed. As well, most data is stored and manipulated using Java and MySQL so that we can easily link tables of data between various stages of the application. Lastly, we used this application as an opportunity to apply design principles and patterns to build a modular and well-documented application that can be improved at any time, some prominent examples are Class, Sequence and Transition diagrams in the design phase, as well as the Singleton design pattern and Model-View-Controller pattern in the implementation phase.
-
 ## Sample Screenshots 
 ### Main Menu:
 
